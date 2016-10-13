@@ -22,6 +22,13 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         })
+        User.hasMany(models.Event, {
+          onDelete: "CASCADE",
+          hooks: true,
+          foreignKey: {
+            allowNull: false
+          }
+        })
       }
     }
   })
