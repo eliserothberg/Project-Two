@@ -1,8 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Event = sequelize.define('Event', {
-    event_name: DataTypes.STRING,
-    day: DataTypes.DATE
+    recipient_name: DataTypes.STRING,
+    event_date: DataTypes.DATE,
+    event_type: DataTypes.STRING
   }, {
   
     // don't delete database entries but set the newly added attribute deletedAt

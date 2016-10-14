@@ -8,17 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      event_name: {
+      recipient_name: {
         type: Sequelize.STRING
       },
-      day: {
+      event_date: {
         type: Sequelize.DATE
       },
-      createdAt: {
+      type: {
+        type: Sequelize.STRING
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
