@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session'); 
 var methodOverride = require('method-override'); // for deletes in express
 
-
+// This is a comment 10/13/2016
 // Our model controllers (rather than routes)
 var application_controller = require('./controllers/application_controller');
 
