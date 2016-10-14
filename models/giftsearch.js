@@ -1,18 +1,13 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var giftSearch = sequelize.define('giftSearch', {
-    search_name: DataTypes.STRING,
+    giftName: DataTypes.STRING,
     vendor: DataTypes.STRING,
-    price: DataTypes.INT
+    cost: DataTypes.DECIMAL
   }, {
     classMethods: {
       associate: function(models) {
-        giftSearch.belongsTo(models.Gift, {
-          onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
-        })
+        // associations can be defined here
       }
     }
   });

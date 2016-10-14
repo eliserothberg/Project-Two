@@ -9,18 +9,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session'); 
 var methodOverride = require('method-override'); // for deletes in express
 
-//JAWSDB connection
-var Sequelize = require('sequelize'),
-  connection;
-if (process.env.JAWSDB_URL) {
-}
-else {
-  connection = new Sequelize('items', 'root', 'password', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: '3306'
-  })
-}
 //allows foreign keys
 sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 
@@ -33,10 +21,6 @@ var events_controller = require('./controllers/events_controller');
 var users_controller = require('./controllers/users_controller');
 
 
-// Express settings
-// ================
-
-// instantiate our app
 var app = express();
 
 // override POST to have DELETE and PUT
@@ -56,7 +40,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-// uncomment after placing your favicon in /public
+// uncomment after placing favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -85,6 +69,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
-// our module get's exported as app.
 module.exports = app;
