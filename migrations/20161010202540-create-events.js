@@ -14,7 +14,7 @@ module.exports = {
       event_date: {
         type: Sequelize.DATE
       },
-      type: {
+      event_type: {
         type: Sequelize.STRING
       },
       created_at: {
