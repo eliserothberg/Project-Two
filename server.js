@@ -2,13 +2,49 @@
 // ============
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // for working with cookies
 var bodyParser = require('body-parser');
 var session = require('express-session'); 
 var methodOverride = require('method-override'); // for deletes in express
+var sequelizeConnection = models.sequelize
 
+var Sequelize = require('sequelize'),
+  connection;
+if (process.env.JAWSDB_URL) {
+}
+else {
+  connection = new Sequelize('items', 'root', 'password', {
+    host: 'localhost',
+    dialect: 'mysql',
+    port: '3306'
+  })
+}
+
+var debug = require('debug')('express-example');
+
+//bring in the app we exported from server.js
+var app = require('../server');
+
+//bring in the models we exported with index.js
+var models = require("../models");
+
+//set the port of the app
+// app.set('port', process.env.PORT || 3000);
+
+var port = process.env.PORT || 3000;
+app.listen(port);
+
+
+//sync the models, creating tables
+models.sequelize.sync().then(function () {
+  // set app to listen to the port we set above
+  var server = app.listen(app.get('port'), function() {
+    // save a log of the listening to our debugger.
+    debug('Express server listening on port ' + server.address().port);
+  });
+});
 //allows foreign keys
 sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 
