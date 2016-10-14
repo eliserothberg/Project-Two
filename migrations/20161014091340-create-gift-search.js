@@ -8,14 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      search_name: {
+      giftName: {
         type: Sequelize.STRING
       },
       vendor: {
         type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.INT
+      cost: {
+        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,
