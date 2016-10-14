@@ -9,6 +9,21 @@ var bodyParser = require('body-parser');
 var session = require('express-session'); 
 var methodOverride = require('method-override'); // for deletes in express
 
+//JAWSDB connection
+var Sequelize = require('sequelize'),
+  connection;
+if (process.env.JAWSDB_URL) {
+}
+else {
+  connection = new Sequelize('items', 'root', 'password', {
+    host: 'localhost',
+    dialect: 'mysql',
+    port: '3306'
+  })
+}
+//allows foreign keys
+sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
+
 // This is a comment 10/13/2016
 // Our model controllers (rather than routes)
 var application_controller = require('./controllers/application_controller');
