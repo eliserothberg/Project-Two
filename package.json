@@ -1,11 +1,12 @@
 {
   "name": "eMinder",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+  "private": true,
+    "main": "server.js",
+    "scripts": {
+      "start": "node ./bin/www"
+    },
+
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "~1.13.2",

@@ -3,8 +3,8 @@ var express = require('express');
 var router  = express.Router();
 
 router.get('/', function(req, res) {
-  res.redirect('/events');
-  console.log('baz');
+  res.redirect('/');
+  console.log('*** gifts_controller');
 });
 
 module.exports = router;

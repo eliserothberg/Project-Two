@@ -9,7 +9,7 @@ var Sequelize = require('sequelize'),
 if (process.env.JAWSDB_URL) {
 }
 else {
-  connection = new Sequelize('items', 'root', 'password', {
+  connection = new Sequelize('eMinder', 'root', 'password', {
     host: 'localhost',
     dialect: 'mysql',
     port: '3306'
