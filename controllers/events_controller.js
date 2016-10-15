@@ -4,7 +4,7 @@ var router  = express.Router();
 
 
 router.get('/', function(req, res) {
-  console.log("foo");
+    console.log("****events_controller");
 
   //Find all to get the gifts and the user tracking them
   //THIS IS NOT WORKING  
@@ -13,15 +13,14 @@ router.get('/', function(req, res) {
   })
   // connect the findAll to this .then
   .then(function(events) {
-    console.log("foobar");
+    console.log("* * * just before render");
     // grab the user info from our req. from the users_controller.js file.
-    res.render('events/index', {
+    res.render('gifts/index', {
       user_id: req.session.user_id,
       email: req.session.user_email,
       logged_in: req.session.logged_in,
       events: events
     });
-    res.redirect('/events');
   });
 });
 

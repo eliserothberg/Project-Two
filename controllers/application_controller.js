@@ -4,7 +4,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res) {
   res.redirect('/events');
-  console.log('bar');
+  console.log('*** app_controller');
 });
 
 module.exports = router;

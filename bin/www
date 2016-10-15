@@ -1,17 +1,23 @@
 #!/usr/bin/env node
 
 //JAWSDB connection
+var models  = require('../models');
+var sequelizeConnection = models.sequelize
+
 var Sequelize = require('sequelize'),
   connection;
 if (process.env.JAWSDB_URL) {
 }
 else {
-  connection = new Sequelize('items', 'root', 'password', {
+  connection = new Sequelize('eMinder', 'root', 'password', {
     host: 'localhost',
     dialect: 'mysql',
     port: '3306'
   })
 }
+
+//allows foreign keys
+sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 
 var debug = require('debug')('express-example');
 
@@ -22,15 +28,15 @@ var app = require('../server');
 var models = require("../models");
 
 //set the port of the app
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 
-// var port = process.env.PORT || 3000;
-// app.listen(port);
+var port = process.env.PORT || 3000;
+app.listen(port);
 
 
 //sync the models, creating tables
 models.sequelize.sync().then(function () {
-	// set app to listen to the port we set above
+  // set app to listen to the port we set above
   var server = app.listen(app.get('port'), function() {
     // save a log of the listening to our debugger.
     debug('Express server listening on port ' + server.address().port);
