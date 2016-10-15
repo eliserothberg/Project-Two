@@ -21,24 +21,27 @@ router.get('/sign-out', function(req,res) {
 
 // login
 router.post('/login', function(req, res) {
+	console.log('at the login');
+	console.log(req.body.email);
   models.User.findOne({
     where: {email: req.body.email}
   }).then(function(user) {
-
+console.log('at the sign in');
 		if (user == null){
 			res.redirect('/users/sign-in')
 		}
-
+console.log('at the bcrypt');	
 		// bcrypt compares user's password input with stored hash
     bcrypt.compare(req.body.password, user.password_hash, function(err, result) {
         if (result == true){
+        	console.log('in bcrypt');
+        	console.log(req.body.email);
 					// we save the logged in status user id and email to the session
-          req.session.logged_in = true;
-					req.session.username = user.username;
-          req.session.user_id = user.id;
-          req.session.user_email = user.email;
-
-          res.redirect('/');
+	        req.session.logged_in = true;
+			req.session.username = req.body.email;
+	        req.session.user_id = user.id;
+	        req.session.user_email = user.email;
+	        res.redirect('/events');
         }
         // if password invalid
         else{
@@ -52,39 +55,34 @@ router.post('/login', function(req, res) {
 
 // register a user
 router.post('/create', function(req,res) {
-	models.User.findAll({
-    where: {email: req.body.email}
-  }).then(function(users) {
-
+	return models.User.findAll({
+	    where: {email: req.body.email}
+ 	})
+ 	.then(function(users) {
 		if (users.length > 0){
 			console.log(users)
 			res.send('we already have an email or username for this account')
 		}else{
-
 			// Use bcrypt to generate a 10-round salt and then hash the user's password.
-			bcrypt.genSalt(10, function(err, salt) {
-					bcrypt.hash(req.body.password, salt, function(err, hash) {
-						
-						// create new user and store info
-						models.User.create({
-							email: req.body.email,
-							password_hash: hash
-						})
-						.then(function(user){
-
-							//enter the user's session by setting properties to req.
-							// and save the logged in status to the session
-		          req.session.logged_in = true;
-							req.session.username = user.username;
-		          req.session.user_id = user.id;
-		          req.session.user_email = user.email;
-
-		          // redirect to home on login
-							res.redirect('/')
+			return 	bcrypt.genSalt(10, function(err, salt) {
+						bcrypt.hash(req.body.password, salt, function(err, hash) {
+							// create new user and store info
+							return models.User.create({
+								email: req.body.email,
+								password_hash: hash
+							})
+							.then(function(user){
+								//enter the user's session by setting properties to req.
+								// and save the logged in status to the session
+					          	req.session.logged_in = true;
+								req.session.username = user.username;
+					        	req.session.user_id = user.id;
+					          	req.session.user_email = user.email;
+			         			// redirect to home on login
+								res.redirect('/')
+							});
 						});
 					});
-			});
-
 		}
 	});
 });
