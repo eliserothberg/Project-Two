@@ -1,7 +1,7 @@
 <h1>Gift tracking and Reminders</h1>
 
-{{#if username}}
-  Welcome {{username}}! Register important dates and add gift tracking.
+{{#if this.username}}
+  Welcome {{this.username}}! Register important dates and add gift tracking.
 {{/if}}
 
 {{#unless logged_in}}
@@ -9,20 +9,38 @@
 {{/unless}}
 
 {{#if logged_in}}
+<ul>
+{{#each eventdisp}}
+  <li>
+  Recipient: {{this.recipient_name}}
+  <br>
+  Date: {{this.event_date}}
+  <br>
+  Occasion: {{this.event_type}}
+  <br>
+  </li>
+
+{{/each}}
+</ul>
+
   <h2>Add an Occasion</h2>
 
   <form class="create-update-form" action="date/create" method="POST">
 
     <div class="form-group">
       <label for="aDate">Occasion:</label>
-      <input type="text" id="aDate" name="date">
+      <input type="text" id="atype" name="type">
     </div>
 
     <div class="form-group">
-      <label for="aGift">Gift:</label>
-      <input type="text" id="aGift" name="gift">
+      <label for="aGift">Date:</label>
+      <input type="text" id="adate" name="date">
     </div>
 
+    <div class="form-group">
+      <label for="aGift">Who's it for:</label>
+      <input type="text" id="aname" name="date">
+    </div>
 
     <button type="submit">Add Occasion</button>
   </form>

@@ -8,15 +8,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session'); 
 var methodOverride = require('method-override'); // for deletes in express
 
-
 // This is a comment 10/13/2016
 // Our model controllers (rather than routes)
 var application_controller = require('./controllers/application_controller');
 
 var events_controller = require('./controllers/events_controller');
-
 var users_controller = require('./controllers/users_controller');
-
 var gifts_controller = require('./controllers/gifts_controller');
 
 //JAWSDB connection
@@ -37,34 +34,29 @@ var gifts_controller = require('./controllers/gifts_controller');
 
 // //allows foreign keys
 // sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
-
 var app = express();
 
 // override POST to have DELETE and PUT
 app.use(methodOverride('_method'))
-
 //allow sessions
 app.use(session({ secret: 'app', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 app.use(cookieParser());
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
 //set up handlebars
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', application_controller);
 app.use('/events', events_controller);
+app.use('/date',events_controller);
 app.use('/users', users_controller);
 app.use('/gifts', gifts_controller);
 // catch 404 and forward to error handler
@@ -85,5 +77,9 @@ app.use(function(req, res, next) {
 //     error: (app.get('env') === 'development') ? err : {}
 //   });
 // });
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function(){
+	console.log('App listening on PORT ' + PORT);
+});
 
 module.exports = app;
