@@ -15,7 +15,7 @@ router.get('/sign-in', function(req,res) {
 
 router.get('/sign-out', function(req,res) {
   req.session.destroy(function(err) {
-     res.redirect('/')
+     res.redirect('/events/signout');
   })
 });
 
@@ -94,5 +94,5 @@ router.post('/create', function(req,res) {
 	});
 });
 
+
 module.exports = router;
-module.exports = userId;
