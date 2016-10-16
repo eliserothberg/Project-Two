@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-console.log('got to the www file'):
+
+console.log("got to the www file");
+
 //JAWSDB connection
 var models  = require('../models');
 var sequelizeConnection = models.sequelize
