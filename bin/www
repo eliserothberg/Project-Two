@@ -5,6 +5,7 @@ console.log("got to the www file");
 var models  = require('../models');
 var sequelizeConnection = models.sequelize
 
+
 var Sequelize = require('sequelize');
 //   connection;
 // if (process.env.JAWSDB_URL) {

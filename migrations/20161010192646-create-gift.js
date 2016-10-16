@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       gift_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:false
       },
       max_price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique:false
       },
       purchased: {
         type: Sequelize.BOOLEAN

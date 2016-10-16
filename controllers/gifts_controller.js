@@ -7,7 +7,4 @@ router.get('/', function(req, res) {
   res.redirect('/');
 });
 
-router.get('./date/create', function(req, res) {
-  console.log('got to the creation page');
-});
 module.exports = router;
