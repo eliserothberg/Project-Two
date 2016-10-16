@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     recipient_name: DataTypes.STRING,
     event_date: DataTypes.DATE,
     event_type: DataTypes.STRING,
-    delete_at: DataTypes.DATE,
+    deletedAt: DataTypes.DATE,
     user_id: DataTypes.INTEGER
   }, {
   
