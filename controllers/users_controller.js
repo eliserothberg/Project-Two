@@ -38,12 +38,9 @@ console.log('at the bcrypt');
         	console.log(req.body.email);
 					// we save the logged in status user id and email to the session
 	        req.session.logged_in = true;
-<<<<<<< HEAD
-			// req.session.username = req.body.email;
-=======
+
 			req.session.username = req.body.email;
           // req.session.username = user.username;
->>>>>>> elise
 	        req.session.user_id = user.id;
 	        userId=user.id;
 	        req.session.email = user.email;
