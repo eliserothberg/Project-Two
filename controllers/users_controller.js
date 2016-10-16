@@ -28,7 +28,7 @@ router.post('/login', function(req, res) {
   }).then(function(user) {
 console.log('at the sign in');
 		if (user == null){
-			res.redirect('/users/sign-in')
+			res.redirect('/users/events')
 		}
 console.log('at the bcrypt');	
 		// bcrypt compares user's password input with stored hash
