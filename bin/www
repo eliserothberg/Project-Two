@@ -1,11 +1,13 @@
 #!/usr/bin/env node
-console.log('got to the www file'):
+console.log("got to the www file");
+
 //JAWSDB connection
 var models  = require('../models');
 var sequelizeConnection = models.sequelize
 
-var Sequelize = require('sequelize'),
-  connection;
+
+var Sequelize = require('sequelize');
+//   connection;
 // if (process.env.JAWSDB_URL) {
 // }
 // else {
@@ -30,8 +32,8 @@ var models = require("../models");
 //set the port of the app
 // app.set('port', process.env.PORT || 3000);
 
-var port = process.env.PORT || 3000;
-app.listen(port);
+// var port = process.env.PORT || 3000;
+// app.listen(port);
 
 
 //sync the models, creating tables

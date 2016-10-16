@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "!!CRUMBLE!@8i6",
+    "password": "password",
     "database": "eMinder",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -20,6 +20,5 @@
     "host": "m7wltxurw8d2n21q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "use_env_variable": "JAWSDB_URL"
-
   }
 }
