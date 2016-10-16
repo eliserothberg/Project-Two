@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 console.log("got to the www file");
 
 //JAWSDB connection
