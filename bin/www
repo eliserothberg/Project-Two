@@ -6,15 +6,15 @@ var sequelizeConnection = models.sequelize
 
 var Sequelize = require('sequelize'),
   connection;
-if (process.env.JAWSDB_URL) {
-}
-else {
-  connection = new Sequelize('eMinder', 'root', 'password', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: '3306'
-  })
-}
+// if (process.env.JAWSDB_URL) {
+// }
+// else {
+//   connection = new Sequelize('eMinder', 'root', 'password', {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//     port: '3306'
+//   })
+// }
 
 //allows foreign keys
 sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')

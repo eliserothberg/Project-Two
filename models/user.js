@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        User.hasMany(models.Event, {onDelete: 'cascade', hooks:true});
+        User.belongsToMany(models.Event, {through: models.Userevents, unique:false});
+        // User.hasMany(models.Event, {onDelete: 'cascade', hooks:true});
         // User.hasMany(models.Gift, {
         //   onDelete: "CASCADE",
         //   hooks: true,

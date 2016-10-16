@@ -2,32 +2,36 @@ var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
 var eventArray = [];
+var userId=require('./users_controller.js');
 
     console.log("****events_controller");
 
 router.get('/', function(req, res) {
   var holder=[];
-  console.log('In the events controller');  
+  console.log('In the events controller'); 
+  console.log(userId); 
   console.log(req.session.email);
-  console.log(req.session.id);
+  console.log(req.session.user_id);
   console.log(req.session.logged_in);
-  //Find all to get the gifts and the user tracking them
-  //THIS IS NOT WORKING  
   var renderObj ={
     recipient_name:"",
     event_date:0,
     event_type:""
   };
-  return models.User.findAll({
+  return models.User.findOne({
     where:{
-
+      id:req.session.user_id
     }
     // include: [ models.User ]
   })
   // connect the findAll to this .then
-  .then(function(events) {
+  .then(function(user) {
+    return user.getEvents();
+  }).then(function(events){
     // clear event array
     eventArray=[];
+    var doThey=false;
+    // console.log(events);
     console.log("* * * just before render -events controller");
     console.log(events[0].event_date,events[0].event_type);
     renderObj.recipient_name=events[0].recipient_name;
@@ -38,11 +42,15 @@ router.get('/', function(req, res) {
     console.log(holder);
     var passObj={eventsdisp:holder};
     console.log(passObj);
-    // grab the user info from our req. from the users_controller.js file.
+    console.log('holder '+ holder.length);
+    if (holder.length>0){doThey=true};
+
     res.render('./gifts/index', {
       eventdisp:holder,
       username:req.session.username,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      eventsExist:doThey,
+      id:req.session.user_id
     });
   });
 });
@@ -50,6 +58,7 @@ router.get('/', function(req, res) {
 router.post('/create', function (req, res) {
  //create event
  console.log('creating the event');
+ console.log(req.session.user_id);
  console.log(req.body.name, req.body.date, req.body.type);
   return models.Event.create({
     recipient_name: req.body.name,
@@ -58,8 +67,10 @@ router.post('/create', function (req, res) {
     user_id: req.session.user_id
   })
   // connect the .create to this .then
-  .then(function() {
-    res.redirect('/');
+  .then(function(eventcreated) {
+    console.log('creating the association')
+    console.log(eventcreated.user_id);
+    return eventcreated.addUser(eventcreated.user_id).then(res.redirect('/events'));
   });
 });
 

@@ -7,9 +7,12 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     recipient_name: DataTypes.STRING,
-    event_date: DataTypes.DATE,
+    event_date: {
+      type:DataTypes.DATE,
+      unique:false
+    },
     event_type: DataTypes.STRING,
-    delete_at: DataTypes.DATE,
+    deletedAt: DataTypes.DATE,
     user_id: DataTypes.INTEGER
   }, {
   
@@ -30,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        Event.hasOne(models.Gift);
+        Event.belongsToMany(models.User, {through: models.Userevents, unique:false});
+        // Event.hasOne(models.Gift);
         // Event.belongsTo(models.User, {
         //   onDelete: "CASCADE",
         //   foreignKey: {

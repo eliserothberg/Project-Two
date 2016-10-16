@@ -2,7 +2,7 @@ var bcrypt = require('bcryptjs');
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
-
+var userId=0;
 console.log("*** users_controller")
 
 router.get('/new', function(req,res) {
@@ -38,9 +38,10 @@ console.log('at the bcrypt');
         	console.log(req.body.email);
 					// we save the logged in status user id and email to the session
 	        req.session.logged_in = true;
-			req.session.username = req.body.email;
+			// req.session.username = req.body.email;
 	        req.session.user_id = user.id;
-	        req.session.user_email = user.email;
+	        userId=user.id;
+	        req.session.email = user.email;
 	        res.redirect('/events');
         }
         // if password invalid
@@ -55,14 +56,19 @@ console.log('at the bcrypt');
 
 // register a user
 router.post('/create', function(req,res) {
+	console.log('at the users');
+	console.log(req.body.email);
 	return models.User.findAll({
 	    where: {email: req.body.email}
  	})
  	.then(function(users) {
+ 		console.log('checked users');
+ 		console.log(users.length);
 		if (users.length > 0){
 			console.log(users)
 			res.send('we already have an email or username for this account')
 		}else{
+			console.log('creating the bcrypt');
 			// Use bcrypt to generate a 10-round salt and then hash the user's password.
 			return 	bcrypt.genSalt(10, function(err, salt) {
 						bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -75,16 +81,18 @@ router.post('/create', function(req,res) {
 								//enter the user's session by setting properties to req.
 								// and save the logged in status to the session
 					          	req.session.logged_in = true;
-								req.session.username = user.username;
+								// req.session.username = user.username;
 					        	req.session.user_id = user.id;
-					          	req.session.user_email = user.email;
+					          	req.session.email = user.email;
 			         			// redirect to home on login
-								res.redirect('/')
+								res.redirect('/events')
 							});
 						});
 					});
-		}
+			}
+			res.redirect('');
 	});
 });
 
 module.exports = router;
+module.exports = userId;

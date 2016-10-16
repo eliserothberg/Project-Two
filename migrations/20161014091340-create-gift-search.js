@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       giftName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:false
       },
       vendor: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:false
       },
       cost: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        unique:false
       },
       created_at: {
         allowNull: false,

@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       recipient_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:false
       },
       event_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        unique:false
       },
       event_type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:false
       },
       created_at: {
         allowNull: false,
