@@ -78,9 +78,6 @@ router.get('/', function(req, res) {
 
 router.post('/create', function (req, res) {
  //create event
- console.log('creating the event');
- console.log(req.session.user_id);
- console.log(req.body.name, req.body.date, req.body.type);
   return models.Event.create({
     recipient_name: req.body.name,
     event_date: req.body.date,
