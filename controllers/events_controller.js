@@ -19,6 +19,17 @@ router.get('/', function(req, res) {
     loggedIn=true;
     email=req.session.email;
   };
+    console.log('returned the user');
+    console.log(req.session.user_id);
+    if (req.session.user_id==undefined){
+      console.log('got to the error area');
+      res.render('./users/sign_in');
+    }else {
+      userId=req.session.user_id;
+      sessionId=req.sessionId;
+      loggedIn=true;
+      email=req.session.email;
+    }
   return models.User.findOne({
     where:{
       id:userId
@@ -27,6 +38,8 @@ router.get('/', function(req, res) {
   .then(function(user) {
     return user.getEvents();
   }).then(function(events){
+    console.log('in the events');
+    console.log(events);
     counter=0;
     giftArray=[];
     // clear event array
