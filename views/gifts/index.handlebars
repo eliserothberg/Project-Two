@@ -20,8 +20,12 @@
   <br>
   Occasion: {{this.event_type}}
   <br>
+  Gift: {{this.gift_name}}
+  <br>
+  Max-Price: ${{this.max_price}}
+  <br>
+  Purchased: {{this.purchased}}
   </li>
-
 {{/each}}
 </ul>
 {{/if}}
@@ -45,6 +49,22 @@
       <input type="text" id="aname" name="name">
     </div>
 
+    <div class="form-group">
+      <label for="aGift">Gift:</label>
+      <input type="text" id="agift" name="gift">
+    </div>
+
+    <div class="form-group">
+      <label for="aGift">Max Price:</label>
+      <input type="number" id="aprice" name="maxprice">
+    </div>
+
+    <div class="form-group">
+      <input type="radio" name="purchased" value="purchased">Purchased<br>
+      <input type="radio" name="purchased" value="notpurchased">Not-Purchased
+    </div>
+
     <button type="submit">Add Occasion</button>
   </form>
+
 {{/if}}

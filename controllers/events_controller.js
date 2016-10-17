@@ -6,6 +6,8 @@ var userId=0;
 var sessionId="";
 var loggedIn=false;
 var email="";
+var counter=0;
+var giftArray=[];
     console.log("****events_controller");
 
 router.get('/', function(req, res) {
@@ -17,66 +19,64 @@ router.get('/', function(req, res) {
     loggedIn=true;
     email=req.session.email;
   };
-  // console.log(userId); 
-  // console.log(req.session.email);
-  // console.log(req.session.user_id);
-  // console.log(req.session.logged_in);
-  // var renderObj ={
-  //   recipient_name:"",
-  //   event_date:0,
-  //   event_type:""
-  // };
   return models.User.findOne({
     where:{
       id:userId
     }
-    // include: [ models.User ]
   })
-  // connect the findAll to this .then
   .then(function(user) {
     return user.getEvents();
   }).then(function(events){
+    counter=0;
+    giftArray=[];
     // clear event array
     eventArray=[];
     var doThey=false;
     console.log('In yet again');
-    // console.log(user);
     console.log(events.length);
     console.log("* * * just before render -events controller");
-    for (var j=0;j<events.length;j++){
-      // renderObj=events[j].dataValues;
-      // renderObj.recipient_name=events[j].recipient_name;
-      // renderObj.event_date=events[j].event_date;
-      // renderObj.event_type=events[j].event_type;
-      eventArray[j]=events[j].dataValues;
-      // console.log(eventArray[j]);
-    }
-    // console.log('Loaded the eventArray');
-    // for (var k=0;k<eventArray.length;k++){
-    //   console.log('here is the event array:');
-    //   console.log(eventArray[k]);
-    //   console.log('here is the dataValue');
-    //   console.log(events[k].dataValues);
-    // }
-    // console.log(events[0].event_date,events[0].event_type);
-    // console.log(renderObj);
-    // console.log(holder);
-    // var passObj={eventsdisp:holder};
-    // console.log(passObj);  
-    // console.log('holder '+ holder.length);
-    if (eventArray.length>0){doThey=true};
-
-    res.render('./gifts/index', {
-      eventdisp:eventArray,
-      username:sessionId,
-      logged_in: loggedIn,
-      eventsExist:doThey,
-      id:userId
-    });
+    if (events.length>0){
+        return findAssoc(events)
+        .then(function(assoc){
+          for (var j=0;j<events.length;j++){
+            eventArray[j]=events[j].dataValues;
+            eventArray[j].gift_name=giftArray[j].gift_name;
+            eventArray[j].max_price=giftArray[j].max_price;
+            if (giftArray[j].purchased){
+              eventArray[j].purchased='Yes';
+            }else {
+              eventArray[j].purchased='No';
+            }
+          console.log('eventArray '+j);
+          console.log(eventArray[j].max_price);
+          }
+          if (eventArray.length>0){doThey=true};
+          res.render('./gifts/index', {
+            eventdisp:eventArray,
+            username:sessionId,
+            logged_in: loggedIn,
+            eventsExist:doThey,
+            id:userId
+          });
+       });
+      }else{
+          res.render('./gifts/index', {
+            eventdisp:eventArray,
+            username:sessionId,
+            logged_in: loggedIn,
+            eventsExist:doThey,
+            id:userId
+          });
+      }
   });
 });
 
 router.post('/create', function (req, res) {
+  var newEvent={};
+  // console.log('creating the event');
+  // console.log(req.body.gift);
+  // console.log(req.body.maxprice);
+  // console.log(req.body.purchased);
  //create event
   return models.Event.create({
     recipient_name: req.body.name,
@@ -84,13 +84,33 @@ router.post('/create', function (req, res) {
     event_type: req.body.type,
     user_id: userId
   })
-  // connect the .create to this .then
   .then(function(eventcreated) {
-    console.log('creating the association')
-    console.log(eventcreated.user_id);
-    return eventcreated.addUser(eventcreated.user_id).then(res.redirect('/events'));
-  });
+    newEvent=eventcreated;
+    // console.log('creating the association')
+    // console.log(newEvent);
+    return eventcreated.addUser(eventcreated.user_id);
+  })
+  .then(function(eventassoc){
+    // console.log('the event association');
+    // console.log(eventassoc);
+    var bought=false;
+    if (req.body.purchased=="purchased") {bought=true};
+    if (req.body.maxprice=='') {req.body.maxprice=0};
+    return models.Gift.create({
+      gift_name:req.body.gift,
+      max_price:req.body.maxprice,
+      purchased:bought
+    });
+  })
+  .then(function(giftcreated){
+    // console.log('creating the gift association');
+    // console.log(giftcreated)
+    // console.log('here is the event id');
+    // console.log(newEvent.id);
+    return giftcreated.addEvent(newEvent.id).then (res.redirect('/events'));
+  })
 });
+
 router.get('/signout', function(req,res){
   userId=0;
   res.render('./users/sign_in');
@@ -130,6 +150,63 @@ router.delete('/delete/:id', function(req,res) {
   });
 
 });
+// Recursive function to step thru burger array, find associations and return an array
+// of customers associated with the id of the burger. This will render the name of the
+// last customer to eat the burger when the burger appears in the 'Burgers eaten' 
+// section of the website.
+function findAssoc(array){
+  console.log('got to the top of findAssoc');
+  // if all burgers have been processed, exit recursion
+  if (counter<array.length){
+    // find burger with the id of 'counter' in the table
+    return models.Event.findOne({where: {id:array[counter].id}})
+      .then (function(search){
+        // console.log('returned from the search');
+        // console.log(search.recipient_name);
+        // get associated customers (sequelize created command)
+        return search.getGifts()
+          .then(function(returned){
+            // console.log('returned with gifts');
+            if (returned !='') {
+              // console.log('got something');
+              // var someArray=returned[0]['gift_name'];
+              // console.log(returned[0].gift_name);
+            }
+            // console.log(gifts.dataValues.gift_name, gifts.dataValues.max_price, gifts.dataValues.purchased);
+            // increment counter, push customer's name to associativity array
+            // if the customer name string is empty (user has hit the 'Devour It!'
+            // button without entering a name), add "No One" as the last eater
+            counter+=1;
+            if (returned==''){
+                var objToPush ={
+                  gift_name:'none',
+                  max_price:'N/A',
+                  purchased:false
+                };
+                // console.log('pushing nothing');
+                // console.log(objToPush);
+                giftArray.push(objToPush);
+              } else {
+                var objToPush = {
+                  gift_name:returned[0].gift_name,
+                  max_price:returned[0].max_price,
+                  purchased:returned[0].purchased
+                };
+                // console.log('pushing something');
+                // console.log(objToPush);
+                giftArray.push(objToPush);
+              }
+            // recursively call the array with the burgers array passed in on
+            // initial call
+            return findAssoc(array);
+          });
+      });
+  } else {
+    // processing done - return the associativity array
+    return giftArray;
+    
+  }
+}
 
 
 module.exports = router;
