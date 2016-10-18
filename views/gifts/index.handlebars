@@ -1,70 +1,120 @@
-<h1>Gift tracking and Reminders</h1>
+<body>
+    <video id="bgVideo" controls preload="true" autoplay loop muted>
+        <source src="assets/images/Home_Page.mp4" type="video/mp4">
+    </video>
 
-{{#if this.username}}
-  Welcome {{this.username}}! Register important dates and add gift tracking.
-{{/if}}
+    <!----start-bg---->
+    <div class="bg">
+        <div class="container">
+            <div class="jumbotron">
+                <div class="well logo">
+                    <a href="#">
+                        <h1 id="heads">E-MINDER</h1>
+                    </a>
+                </div>
+                <h3 class="occHead">Gift tracking and Reminders</h3>
+                <div class="page-header" id="mainpage">
+                {{#if this.username}}
+                    Welcome
+                    {{this.username}}!
+                    {{this.id}}
+                    Register important dates and add gift tracking.
+                {{/if}}
 
-{{#unless logged_in}}
-  <p> Sign up </p>
-{{/unless}}
+                {{#unless logged_in}}
+                    <p>
+                        Sign up
+                    </p>
+                {{/unless}}
 
-{{#if logged_in}}
+                {{#if logged_in}}
 
-{{#if eventsExist}}
-<ul>
-{{#each eventdisp}}
-  <li>
-  Recipient: {{this.recipient_name}}
-  <br>
-  Date: {{this.event_date}}
-  <br>
-  Occasion: {{this.event_type}}
-  <br>
-  Gift: {{this.gift_name}}
-  <br>
-  Max-Price: ${{this.max_price}}
-  <br>
-  Purchased: {{this.purchased}}
-  </li>
-{{/each}}
-</ul>
-{{/if}}
+                    {{#if eventsExist}}
+                        <ul>
+                            {{#each eventdisp}}
+                                <li>
+                                    <h5><span class="boldText">Recipient:</span>
+                                    {{this.recipient_name}}</h5>
+                                    <h5><span class="boldText">Date:</span>
+                                    {{this.event_date}}</h5>
 
-  <h2>Add an Occasion</h2>
+                                    <h5><span class="boldText">Occasion:</span>
+                                    {{this.event_type}}</h5>
 
-  <form class="create-update-form" action="events/create" method="POST">
+                                    <h5><h5><span class="boldText">Gift:</span>
+                                    {{this.gift_name}}</h5>
 
-    <div class="form-group">
-      <label for="aDate">Occasion:</label>
-      <input type="text" id="atype" name="type">
+                                    <h5><span class="boldText">Max Price:</span>${{this.max_price}}
+                                    <span class="boldText">Purchased:</span>
+                                    {{this.purchased}}</h5>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                  </div>
+                    <h3 class="occHead">Add an Occasion</h3>
+                    <form class="create-update-form" action="events/create" method="POST">
+                      <div class="col-3">
+                        <label>
+                          Occasion
+                          <input placeholder="What's the deal?" tabindex="1" id="atype" name="type" />
+                        </label>
+                      </div>
+                      <div class="col-3">
+                        <label>
+                          Date
+                          <input type="date" id="adate" tabindex="2" name="date"/>
+                        </label>
+                      </div>
+                      <div class="col-3">
+                        <label>
+                          Gift
+                          <input type="text" placeholder="What's The Gift?" tabindex="3" id="agift" name="gift"/>
+                        </label>
+                      </div>
+                      <div class="col-3">
+                        <label>
+                          Who's It For?
+                          <input type="text" placeholder="WHO?" tabindex="4" id="aname" name="name"/>
+                        </label>
+                      </div>
+                      <div class="col-3">
+                        <label>
+                          Max Price
+                          <input type="number" placeholder="99.99" tabindex="5" id="aprice" name="maxprice"/>
+                        </label>
+                      </div>
+                      <div class="col-3">
+                        <label>
+                          Gift Status
+                          <div class="buttonGroup">
+                              <input type="radio" name="purchased" value="purchased">Purchased
+                              <input type="radio" name="purchased" value="notpurchased">Not-Purchased
+                          </div>
+                        </label>
+                      </div>
+
+                        <button class="button_base b05_3d_roll" type="submit">
+                          <!-- <div id="myBtn1" class="button_base b05_3d_roll" type="submit"> -->
+                          <div>Add Event</div>
+                          <div>Add Event</div>
+                        </div>
+                        </button>
+                    </form>
+                {{/if}}
+
+                <!-- <div id="butDiv">
+                  <div class="button_base b05_3d_roll" data-toggle="modal" data-target="#deletEmodal" href="#">
+                        <div>Delete Event</div>
+                        <div>Delete Event</div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-      <label for="aGift">Date:</label>
-      <input type="date" id="adate" name="date">
-    </div>
-
-    <div class="form-group">
-      <label for="aGift">Who's it for:</label>
-      <input type="text" id="aname" name="name">
-    </div>
-
-    <div class="form-group">
-      <label for="aGift">Gift:</label>
-      <input type="text" id="agift" name="gift">
-    </div>
-
-    <div class="form-group">
-      <label for="aGift">Max Price:</label>
-      <input type="number" id="aprice" name="maxprice">
-    </div>
-
-    <div class="form-group">
-      <input type="radio" name="purchased" value="purchased">Purchased<br>
-      <input type="radio" name="purchased" value="notpurchased">Not-Purchased
-    </div>
-
-    <button type="submit">Add Occasion</button>
-  </form>
-
-{{/if}}
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
