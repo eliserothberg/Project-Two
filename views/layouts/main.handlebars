@@ -9,17 +9,19 @@ Here is the main HTML where handlebars will render to
 		<title>E-minder</title>
 	</head>
 	<body>
-		<p>
-			{{#unless logged_in}}
-				<a href="/users/sign-in">Sign In</a>
-				<a href="/users/new">Sign Up</a>
-			{{/unless}}
+		<div class="logging">
+			<p>
+				{{#unless logged_in}}
+					<a href="/users/sign-in">Sign In</a>
+					<a href="/users/new">Sign Up</a>
+				{{/unless}}
 
-			{{#if logged_in}}
-				Welcome {{email}}! <br>
-				<a href="/users/sign-out">Sign Out</a>
-			{{/if}}
-		</p>
-		{{{ body }}}
+				{{#if logged_in}}
+					Welcome {{email}}! <br>
+					<a href="/users/sign-out">Sign Out</a>
+				{{/if}}
+			</p>
+		</div>
+	{{{ body }}}
 	</body>
 </HTML>
