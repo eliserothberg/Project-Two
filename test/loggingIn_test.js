@@ -5,7 +5,9 @@ var Nightmare = require('nightmare'),
 
 describe('fubar', function () {
 
-  var login = '#regUser';
+
+  // var login = '#regUser';
+  var login = 'a[href*="https://pure-scrubland-84099.herokuapp.com/users/sign-in"]';
 
   it('logging in as existing user', function () {
 
@@ -23,6 +25,8 @@ describe('fubar', function () {
       .type('input[id="em"]', 'bob@gmail.com')
       .type('input[id="pass"]', 'bob')
       .click('input[id="signIn"]')
+      // .click('input[id="submit"]')
+
       // Make sure there are multiple courses
       .evaluate(function () {
         return document.querySelectorAll('logged in');
@@ -38,6 +42,7 @@ describe('fubar', function () {
 
 
  it('signing up but already signed up', function () {
+
     var signingup = 'a[href*="https://pure-scrubland-84099.herokuapp.com/users/new"]';
 
     Nightmare()
@@ -55,7 +60,9 @@ describe('fubar', function () {
       .type('input[id="un"]', 'Bob')
       .type('input[id="em"]', 'bob@gmail.com')
       .type('input[id="pass"]', 'bob')
-      .click('input[id="signup"]')
+      // .click('input[id="signup"]')
+
+      .click('input[id="signIn"]')
       // Make sure there are multiple courses
       .evaluate(function () {
         return document.querySelectorAll('signed up and logged in');

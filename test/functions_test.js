@@ -79,6 +79,7 @@ describe('enterEvent', function() {
   it('should allow user to enter an event date');
 });
 
+
 var deleteEvent = require('../controllers/events_controller.js')
 //should allow all registered users access to the site
 describe('deleteEvent', function() {
@@ -108,6 +109,7 @@ describe('logOut', function() {
 		// }
 	);  
 });
+
 // var Gift = require('../models/gift.js')
 
 // describe('?', function() {
