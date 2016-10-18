@@ -5,6 +5,8 @@ var Nightmare = require('nightmare'),
 
 describe('fubar', function () {
 
+
+  // var login = '#regUser';
   var login = 'a[href*="https://pure-scrubland-84099.herokuapp.com/users/sign-in"]';
 
   it('logging in as existing user', function () {
@@ -22,7 +24,9 @@ describe('fubar', function () {
       // Actually log in
       .type('input[id="em"]', 'bob@gmail.com')
       .type('input[id="pass"]', 'bob')
-      .click('input[id="submit"]')
+      .click('input[id="signIn"]')
+      // .click('input[id="submit"]')
+
       // Make sure there are multiple courses
       .evaluate(function () {
         return document.querySelectorAll('logged in');
@@ -37,12 +41,13 @@ describe('fubar', function () {
   // });
 
 
- it('signing up and already signed up', function () {
+ it('signing up but already signed up', function () {
+
     var signingup = 'a[href*="https://pure-scrubland-84099.herokuapp.com/users/new"]';
 
     Nightmare()
     
-       .goto('https://pure-scrubland-84099.herokuapp.com/')
+      .goto('https://pure-scrubland-84099.herokuapp.com/')
       // Just to be safe.
       .wait(signingup)
       // Click the login button.
@@ -55,7 +60,9 @@ describe('fubar', function () {
       .type('input[id="un"]', 'Bob')
       .type('input[id="em"]', 'bob@gmail.com')
       .type('input[id="pass"]', 'bob')
-      .click('input[id="submitButton"]')
+      // .click('input[id="signup"]')
+
+      .click('input[id="signIn"]')
       // Make sure there are multiple courses
       .evaluate(function () {
         return document.querySelectorAll('signed up and logged in');

@@ -41,7 +41,27 @@ describe('Register', function() {
 
 });
 
-var enterEvent = require('../controllers/users_controller.js')
+var hashPass = require('../controllers/users_controller.js')
+//should allow all registered users access to the site
+describe('hashPass', function() {
+	it('should hash a user\'s password'
+	// 	, function(done) {
+	// 	var user = new User({email:'email@gmail.com', passwordHash:'override'})
+	// 	user.save(function (err) {
+
+	// 	})
+ // //  	chai.request(server)
+	// //     .get('/')
+	// //     .end(function(err, res){
+	// //       res.should.have.status(200);
+	// //       done();
+	// //     });
+	// // }
+	// }
+	);  
+});
+
+var enterEvent = require('../controllers/events_controller.js')
 //should allow all registered users access to the site
 describe('enterEvent', function() {
 	it('should allow user to enter a gift name'
@@ -57,6 +77,37 @@ describe('enterEvent', function() {
 	it('should allow user to enter a recipient name');
   it('should allow user to enter a max price for the gift');
   it('should allow user to enter an event date');
+});
+
+
+var deleteEvent = require('../controllers/events_controller.js')
+//should allow all registered users access to the site
+describe('deleteEvent', function() {
+	it('should allow user to delete event'
+		// , function(done) {
+	 //  chai.request(server)
+	 //    .get('/')
+	 //    .end(function(err, res){
+	 //      res.should.have.status(200);
+	 //      done();
+	 //    });
+		// }
+	);  
+});
+
+var logOut = require('../controllers/events_controller.js')
+//should allow all registered users access to the site
+describe('logOut', function() {
+	it('should allow user to end session'
+		// , function(done) {
+	 //  chai.request(server)
+	 //    .get('/')
+	 //    .end(function(err, res){
+	 //      res.should.have.status(200);
+	 //      done();
+	 //    });
+		// }
+	);  
 });
 
 // var Gift = require('../models/gift.js')

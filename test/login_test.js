@@ -7,7 +7,11 @@
 // // STORY: As a developer nerd, I want to be able to log in to a dashboard of workshops.
 // nightmare
 //   // Visit login page
+
+//   .goto('https://pure-scrubland-84099.herokuapp.com/users/sign-in/')
+
 //   .goto('http://localhost:3000/users/sign-in')
+
 //   // Enter username 
 //   .type('#em', 'bob@gmail.com') 
 //   // Enter password 

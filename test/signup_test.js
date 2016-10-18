@@ -44,7 +44,7 @@ describe('eMinder', function() {
       .wait('#em_logging')
       .type('#em_logging', 'bob@gmail.com')
       .type('#pass_logging', 'bob')
-      .click('#submit_logging')
+      .click('#signIn_logging')
       // .wait('div#form-group.aname')
       // .evaluate(function() {
       //   return document.querySelectorAll('div#form-group.aname').length;
