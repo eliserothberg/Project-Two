@@ -27,6 +27,18 @@ describe('Login returning user', function() {
   it('should tell new user if there is no record of them in the system');
 });
 
+var Login = require('../controllers/users_controller.js')
+//should allow all registered users access to the site
+describe('Login returning user', function() {
+	it('should allow a returning user to enter their username');
+	it('should allow a returning user to enter their email');
+	it('should allow a returning user to enter their password');
+	it('should compare entered password with password hash');
+	it('should allow returning user to submit information');
+  it('should tell new user if there is no record of them in the system');
+  it('should redirect returning user to gift entry page');
+});
+
 var hashPass = require('../controllers/users_controller.js')
 describe('Hash and salt a password', function() {
 	it('should take in a user\'s password');  
@@ -40,7 +52,6 @@ describe('redirect user to the appropriate page', function() {
   it('should redirect new user user to event entry page');
   it('should redirect returning user to gift entry page');
 });
-
 
 var enterEvent = require('../controllers/events_controller.js')
 describe('User should be able to enter a gift and event', function() {
