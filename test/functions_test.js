@@ -1,79 +1,51 @@
 // var expect = require('chai').expect;
 var should = require('chai').should;
 
-var Login = require('../controllers/users_controller.js')
-//should allow all registered users access to the site
-describe('Login', function() {
-	it('should allow user to enter their name'
-	// 	, function(done) {
- //  	chai.request(server)
-	//     .get('/')
-	//     .end(function(err, res){
-	//       res.should.have.status(200);
-	//       done();
-	//     });
-	// }
-	);  
-	it('should allow returning user to enter their password');
-  it('should allow returning user to submit information');
-  it('should tell new user there is no record of them in the system');
-  it('should redirect returning user to gift entry page');
-});
-
 var Register = require('../controllers/users_controller.js')
 //should allow all registered users access to the site
-describe('Register', function() {
-	it('should allow new user to enter their name' 
-	// 	, function(done) {
-	//   chai.request(server)
-	//     .get('/')
-	//     .end(function(err, res){
-	//       res.should.have.status(200);
-	//       done();
-	//     });
-	// }
-	);  
+describe('Register a new user', function() {
+	it('should allow new user to enter their username');
+	it('should allow new user to enter their email');
 	it('should allow new user to enter their password');
   it('should allow new user to submit information');
+  it('should hash new user\'s password');
+  it('should salt new user\'s password');
+  it('should create new user\'s userId');
+  it('should store new user\'s password');
+  it('should store new user\'s email');
+  it('should store new user\'s username');
   it('should redirect new user to gift entry page');
   it('should tell user we already have an email or username for this account if already registered')
   it('should redirect new user to gift entry page');
 
 });
 
+var Login = require('../controllers/users_controller.js')
+//should allow all registered users access to the site
+describe('Login returning user', function() {
+	it('should allow a returning user to enter their username');
+	it('should allow a returning user to enter their email');
+	it('should allow a returning user to enter their password');
+	it('should compare entered password with password hash');
+	it('should allow returning user to submit information');
+  it('should tell new user if there is no record of them in the system');
+  it('should redirect returning user to gift entry page');
+});
+
+
+
 var hashPass = require('../controllers/users_controller.js')
 //should allow all registered users access to the site
 describe('hashPass', function() {
-	it('should hash a user\'s password'
-	// 	, function(done) {
-	// 	var user = new User({email:'email@gmail.com', passwordHash:'override'})
-	// 	user.save(function (err) {
-
-	// 	})
- // //  	chai.request(server)
-	// //     .get('/')
-	// //     .end(function(err, res){
-	// //       res.should.have.status(200);
-	// //       done();
-	// //     });
-	// // }
-	// }
-	);  
+	it('should take in a user\'s password');  
+	it('should hash the password');
+  it('should add salt to the password');
 });
 
 var enterEvent = require('../controllers/events_controller.js')
 //should allow all registered users access to the site
 describe('enterEvent', function() {
-	it('should allow user to enter a gift name'
-		// , function(done) {
-	 //  chai.request(server)
-	 //    .get('/')
-	 //    .end(function(err, res){
-	 //      res.should.have.status(200);
-	 //      done();
-	 //    });
-		// }
-		);  
+	it('should allow user to enter a gift name');  
 	it('should allow user to enter a recipient name');
   it('should allow user to enter a max price for the gift');
   it('should allow user to enter an event date');
@@ -82,17 +54,12 @@ describe('enterEvent', function() {
 
 var deleteEvent = require('../controllers/events_controller.js')
 //should allow all registered users access to the site
-describe('deleteEvent', function() {
-	it('should allow user to delete event'
-		// , function(done) {
-	 //  chai.request(server)
-	 //    .get('/')
-	 //    .end(function(err, res){
-	 //      res.should.have.status(200);
-	 //      done();
-	 //    });
-		// }
-	);  
+describe('Delete an event', function() {
+	it('should allow user to delete event');
+	it('should allow user to enter a gift name');  
+	it('should allow user to enter a recipient name');
+  it('should allow user to enter a max price for the gift');
+  it('should allow user to enter an event date');
 });
 
 var logOut = require('../controllers/events_controller.js')
@@ -112,8 +79,8 @@ describe('logOut', function() {
 
 // var Gift = require('../models/gift.js')
 
-// describe('?', function() {
-// it('should ?', function(done) {
+// describe('this is what should happen overall', function() {
+// it('this is the step it should do', function(done) {
 //   chai.request(server)
 //     .get('/events')
 //     .end(function(err, res){
