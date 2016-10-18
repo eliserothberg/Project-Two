@@ -46,12 +46,14 @@ router.get('/sign-out', function(req,res) {
 router.post('/login', function(req, res) {
 	console.log('at the login');
 	console.log(req.body.email);
-  models.User.findOne({
+   return models.User.findOne({
     where: {email: req.body.email}
   }).then(function(user) {
 console.log('at the sign in');
-		if (user == null){
-			res.redirect('/users/events')
+console.log(user);
+		if (user === null){
+			console.log('the user is null');
+			res.render('users/sign_in');
 		}
 console.log('at the bcrypt');	
 		// bcrypt compares user's password input with stored hash
