@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Event.belongsToMany(models.User, {through: models.Userevents, unique:false});
-        Event.belongsToMany(models.Gift, {through: models.Eventgifts, unique:false});
+        // Event.hasOne(models.Gift);
         // Event.belongsTo(models.User, {
         //   onDelete: "CASCADE",
         //   foreignKey: {
