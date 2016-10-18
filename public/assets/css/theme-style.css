@@ -64,6 +64,12 @@ p {
   text-align: right;
 }
 
+#slogan {
+  position: fixed;
+  bottom: 8em;
+  left: 2.2em;
+}
+
 .window {
   width: 400px;
   height: 177px;
@@ -83,6 +89,8 @@ a {
 
 body a {
     text-decoration: none;
+    margin-right: 1%;
+    color:red;
 }
 
 body a {
@@ -105,7 +113,7 @@ video {
 
 #mainpage {
   min-height: 50px;
-  height: 250px;
+  height: 174px;
   text-align: center;
   border: 1px solid #E4E4E4;
   overflow-x: hidden;
@@ -196,6 +204,7 @@ width: 450px;
 
 #headsMain {
   font-family: oksana;
+  float: left;
   font-style: bold;
   font-size: 5.0em;
   margin-top: 0px;
@@ -224,6 +233,9 @@ width: 300px;
 }
 #myBtn3 {
     font-family: walk;
+    position: fixed;
+    bottom: 2.8em;
+    left: 2.2em;
 }
 
 #title {
@@ -476,6 +488,11 @@ width: 300px;
 #img_logo {
     max-height: 100px;
     max-width: 100px;
+}
+
+#logo {
+  padding-left: 0;
+  margin-left: 0;
 }
 
 /* #########################################
