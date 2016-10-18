@@ -2,6 +2,29 @@ var bcrypt = require('bcryptjs');
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
+
+var app = express();
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+var nodemailer = require('nodemailer');
+//reference the plugin 
+
+var hbs = require('nodemailer-express-handlebars');
+
+var options = {//the plugin options
+   viewEngine: {
+       extname: '.hbs',
+       layoutsDir: 'views/email/',
+       defaultLayout : 'template',
+       partialsDir : 'views/email/partials/'
+   },
+   viewPath: 'views/email/',
+   extName: '.hbs'
+};
+
+
 var userId=0;
 console.log("*** users_controller")
 
@@ -60,6 +83,7 @@ console.log('at the bcrypt');
 router.post('/create', function(req,res) {
 	console.log('at the users');
 	console.log(req.body.email);
+
 	return models.User.findAll({
 	    where: {email: req.body.email}
  	})
@@ -70,6 +94,40 @@ router.post('/create', function(req,res) {
 			console.log(users)
 			res.send('we already have an email or username for this account')
 		}else{
+
+			var transporter = nodemailer.createTransport({
+	        service: 'Gmail',
+	        auth: {
+	            user: 'uclaProject2@gmail.com',
+	            pass: 'superpassword'
+	        } 
+	    });
+	    //attach the plugin to the nodemailer transporter 
+			transporter.use('compile', hbs(options));
+
+	    var mailOptions = {
+	        from: '"E-minder" <uclaProject2@gmail.com>',
+	        to: 'montalvocode@yahoo.com',//change this to req.body.email
+	        subject: "Welcome to E-minder!",
+	        template: 'email_body',
+	        context: {
+	            username: req.body.email,
+	            event: 'Birthday'
+	        }
+	    };
+
+	    transporter.sendMail(mailOptions, function(error, info){
+	        if(error){
+	            console.log(error);
+	            // res.redirect('/');
+	        }else {
+	            console.log('Message sent: ' + info.response);
+	            // res.redirect('/');
+	        }
+	    });
+
+
+
 			console.log('creating the bcrypt');
 			// Use bcrypt to generate a 10-round salt and then hash the user's password.
 			return 	bcrypt.genSalt(10, function(err, salt) {

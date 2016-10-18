@@ -21,6 +21,8 @@
     "morgan": "~1.6.1",
     "mysql": "^2.11.1",
     "nightmare": "^2.7.0",
+    "nodemailer": "^2.6.4",
+    "nodemailer-express-handlebars": "^2.0.0",
     "sequelize": "^3.3.2",
     "sequelize-cli": "^1.7.1"
   },
