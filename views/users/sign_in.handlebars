@@ -1,19 +1,30 @@
 <!-- this is the sign_in.handlebars file inside the users folder of the views folder
 views/users/sign_in.handlebars -->
+
+    <video id="bgVideo" controls preload="true" autoplay loop muted>
+        <source src="../assets/images/suns.mp4" type="video/mp4">
+    </video>
+
+<div class="window">
+<h3 class="occHead">Sign In</h3>
 <form class="create-update-form" action="/users/login" method="POST">
-  <div class="logging">
-
-    <div class="form-group">
-      <label for="em">Email:</label>
-      <input type="text" id="em" name="email">
-    </div>
-
-    <div class="form-group">
-      <label for="pass">Password:</label>
-      <input type="password" id="pass" name="password">
-    </div>
-
-    <button type="submit" id="signIn">Sign In</button>
-    
+  <div class="col-2">
+    <label>
+      Email
+      <input type="text" id="em" tabindex="2" name="email"/>
+    </label>
   </div>
+  <div class="col-2">
+    <label>
+      Password
+      <input type="password" tabindex="3" id="pass" name="password"/>
+    </label>
+  </div>
+  <button class="button_base b05_3d_roll" type="submit">
+      <!-- <div id="myBtn1" class="button_base b05_3d_roll" type="submit"> -->
+      <div>Sign In</div>
+      <div>Sign In</div>
+    </div>
+    </button>
 </form>
+</div>

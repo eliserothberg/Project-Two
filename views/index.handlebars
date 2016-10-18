@@ -1,53 +1,295 @@
-<h1>E-minder</h1>
+<body>
+    <video id="bgVideo" controls preload="true" autoplay loop muted>
+        <source src="assets/images/festive.mp4" type="video/mp4">
+    </video>
 
-<h2>Create a new person</h2>
+    <!----start-bg---->
+    <div class="bg">
+        <!----start-container---->
+        <div class="container">
+            <!---- start-header---->
+            <div class="row header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!----start-logo---->
+                        <div class="well logo">
+                                <h1 id="headsMain">E-MINDER</h1>
+                        </div>
+                        <!----//End-logo---->
+                    </div>
+                    <div class="col-md-6" id="corner">
+                        <!---start-header-right--->
+                        <div class="login-info well header-right">
+                            <!-- <div id="myBtn1" class="button_base b05_3d_roll" data-toggle="modal" data-target="#login-modal" href="#">
+                                <div>Login | Sign Up</div>
+                                <div>Login | Sign Up</div>
+                            </div> -->
+                            <a href="/users/new">
+                            <div id="myBtn1" class="button_base b05_3d_roll">
+                                <div>Sign Up</div>
+                                <div>Sign Up</div>
+                            </div>
+                          </a>
+                          <a href="/users/sign-in">
+                            <div id="myBtn2" class="button_base b05_3d_roll">
+                                <div>Login</div>
+                                <div>Login</div>
+                            </div>
+                          </a>
+                        </div>
+                        <!---//End-header-right--->
+                    </div>
+                </div>
+            </div>
+            <!---- //End-header---->
+            {{#if logged_in}}
+                <form action="/people/create" method="POST">
+                    <input type="text" name="name">
 
-{{#if logged_in}}
-<div class="logging">
-  <form action="/people/create" method="POST">
-    <input type="text" name="name">
+                    <input type="submit">
+                </form>
+            {{/if}}
 
-    <input type="submit">
-  </form>
-{{/if}}
+            {{#unless logged_in}}
+                <!-- <p>
+                    You must login to add a person
+                </p> -->
+            {{/unless}}
 
-{{#unless logged_in}}
-  <p>
-    You must login to add a person.
-  </p>
-{{/unless}}
-</div>
 
-<h2>People</h2>
+            <ul>
+                {{#each people}}
+                    <li>
+                        {{this.name}}
+                        {{#if ../logged_in}}
+                            <a href="/people/{{this.id}}/destroy">
+                                destroy</a>
+                        {{/if}}
+                        <ul>
+                            {{#if ../logged_in}}
+                                <li>
+                                    <form action="/people/{{this.id}}/tasks/create" method="POST" style="display: inline">
+                                        <input type="text" name="task" placeholder="add task here">
+                                        <input type="submit" value"assign task">
+                                    </form>
+                                </li>
+                            {{/if}}
 
-<div class="logging">
-  <ul>
-    {{#each people}}
-      <li>
-        {{this.name}}
-        {{#if ../logged_in}}
-          <a href="/people/{{this.id}}/destroy"> destroy</a>
-        {{/if}}
-        <ul>
-          {{#if ../logged_in}}
-            <li>
-              <form action="/people/{{this.id}}/tasks/create" method="POST" style="display: inline">
-                <input type="text" name="task" placeholder="add task here">
-                <input type="submit" value"assign task">
-              </form>
-            </li>
-          {{/if}}
+                            {{#each this.Tasks }}
+                                <li>
+                                    {{this.task}}
+                                    {{#if ../../logged_in}}
+                                        <a href="/people/{{this.person_id}}/tasks/{{this.id}}/destroy">destroy</a>
+                                    {{/if}}
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/each}}
+            </ul>
 
-          {{#each this.Tasks }}
-            <li>
-              {{this.task}}
-              {{#if ../../logged_in}}
-                <a href="/people/{{this.person_id}}/tasks/{{this.id}}/destroy">destroy</a>
-              {{/if}}
-            </li>
-          {{/each}}
-        </ul>
-      </li>
-    {{/each}}
-  </ul>
-</div>
+            <!-----slide-banner---->
+            <div class="well slide-banner row">
+                <div class="slide-banner-left col-md-6">
+                    <span></span>
+                    <h1>When you need to remember...</h1>
+                    <p class="shadow">and you can't remember
+                        <span class="redText">shit</span>.</p>
+                    <p>
+                        <div id="myBtn3" class="button_base b05_3d_roll" href="#">
+                            <div>Read More</div>
+                            <div>Read More</div>
+                        </div>
+                    </p>
+                </div>
+                <div class="well slide-banner-right col-md-4" id="icon">
+                    <div>
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        <i id="bogus" class="fa fa-bolt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <script>
+        	$(document).ready(function () {
+        		$("#myBtn3").click(function () {
+        			$("#myModal3").modal();
+        		});
+        	});
+        </script>
+        <script>
+        $(function() {
+
+            var $formLogin = $('#login-form');
+            var $formLost = $('#lost-form');
+            var $formRegister = $('#register-form');
+            var $divForms = $('#div-forms');
+            var $modalAnimateTime = 300;
+            var $msgAnimateTime = 150;
+            var $msgShowTime = 2000;
+
+            $("form").submit(function () {
+                switch(this.id) {
+                    case "login-form":
+                        var $lg_username=$('#login_username').val();
+                        var $lg_password=$('#login_password').val();
+                        if ($lg_username == "ERROR") {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
+                        } else {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
+                        }
+                        return false;
+                        break;
+                    // case "lost-form":
+                    //     var $ls_email=$('#lost_email').val();
+                    //     if ($ls_email == "ERROR") {
+                    //         msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
+                    //     } else {
+                    //         msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
+                    //     }
+                    //     return false;
+                    //     break;
+                    // case "register-form":
+                    //     var $rg_username=$('#register_username').val();
+                    //     var $rg_email=$('#register_email').val();
+                    //     var $rg_password=$('#register_password').val();
+                    //     if ($rg_username == "ERROR") {
+                    //         msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
+                    //     } else {
+                    //         msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                    //     }
+                    //     return false;
+                    //     break;
+                    default:
+                        return false;
+                }
+                return false;
+            });
+
+            $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
+            $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
+            // $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
+            // $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
+            // $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
+            $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
+
+            function modalAnimate ($oldForm, $newForm) {
+                var $oldH = $oldForm.height();
+                var $newH = $newForm.height();
+                $divForms.css("height",$oldH);
+                $oldForm.fadeToggle($modalAnimateTime, function(){
+                    $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+                        $newForm.fadeToggle($modalAnimateTime);
+                    });
+                });
+            }
+
+            function msgFade ($msgId, $msgText) {
+                $msgId.fadeOut($msgAnimateTime, function() {
+                    $(this).text($msgText).fadeIn($msgAnimateTime);
+                });
+            }
+
+            function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+                var $msgOld = $divTag.text();
+                msgFade($textTag, $msgText);
+                $divTag.addClass($divClass);
+                $iconTag.removeClass("glyphicon-chevron-right");
+                $iconTag.addClass($iconClass + " " + $divClass);
+                setTimeout(function() {
+                    msgFade($textTag, $msgOld);
+                    $divTag.removeClass($divClass);
+                    $iconTag.addClass("glyphicon-chevron-right");
+                    $iconTag.removeClass($iconClass + " " + $divClass);
+          		}, $msgShowTime);
+            }
+        });
+        </script>
+        			<!-- Modal for Read More-->
+        			<div class="modal fade" id="myModal3" role="dialog">
+        				<div class="modal-dialog">
+        					<div class="modal-content">
+        						<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">ABOUT E-MINDER</h4>
+        						</div>
+        						<div class="modal-body">
+        							<p><a taget="_new" href="https://github.com/eliserothberg/Project-Two/blob/master/README.md">READ ME</a></p>
+        						</div>
+        						<div class="modal-footer">
+        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<!-- BEGIN # MODAL LOGIN -->
+        			<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        			    	<div class="modal-dialog">
+        						<div class="modal-content">
+        							<div class="modal-header" align="center">
+        								<img src="assets/images/logo.png">
+        								<img src="assets/images/logo.png">
+        								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        								</button>
+        							</div>
+
+        			                <!-- Begin # DIV Form -->
+        			                <div id="div-forms">
+
+        			                    <!-- Begin # Login Form -->
+        			                    <form id="login-form">
+        					                <div class="modal-body">
+        							    		<div id="div-login-msg">
+        			                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+        			                                <span id="text-login-msg">Type your username and password.</span>
+        			                            </div>
+        							    		<input id="login_username" class="form-control" type="text" placeholder="Username" required>
+        							    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+        			                            <div class="checkbox">
+        			                                <label>
+        			                                    <input type="checkbox"> Remember me
+        			                                </label>
+        			                            </div>
+        			        		    	</div>
+        							        <div class="modal-footer">
+        			                            <div>
+        			                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+        			                            </div>
+        							    	    <div>
+        			                                <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+        			                            </div>
+        							        </div>
+        			                    </form>
+        			                    <!-- End # Login Form -->
+
+        			                    <!-- Begin | Register Form -->
+        			                    <form class="create-update-form" action="/users/create" method="POST" id="register-form" style="display:none;">
+        			            		    <div class="form-group">
+                                    <input id="un" class="form-control" type="text" name="username" placeholder="Username" required>
+        			                            <input id="em" class="form-control" type="text" name="email" placeholder="E-Mail" required>
+        			                            <input id="pass" class="form-control" type="password" name="pass" placeholder="Password" required>
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                                        </div>
+        					    		    <div class="modal-footer">
+        			                            <div>
+        			                                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+        			                            </div>
+        			                            <div>
+        			                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+          			                            </div>
+        					    		    </div>
+        			                    </form>
+        			                    <!-- End | Register Form -->
+
+        			                </div>
+        			                <!-- End # DIV Form -->
+
+        						</div>
+        					</div>
+        				</div>
+        			    <!-- END # MODAL LOGIN -->
+
+</body>
