@@ -12,8 +12,8 @@ Here is the main HTML where handlebars will render to
 		<div class="logging">
 			<p>
 				{{#unless logged_in}}
-					<a href="/users/sign-in">Sign In</a>
-					<a href="/users/new">Sign Up</a>
+					<div id="regUser"><a href="/users/sign-in">Sign In</a></div>
+					<div id="newUser"><a href="/users/new">Sign Up</a></div>
 				{{/unless}}
 
 				{{#if logged_in}}
