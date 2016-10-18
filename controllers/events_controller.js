@@ -3,7 +3,7 @@ var express = require('express');
 var router  = express.Router();
 var eventArray = [];
 var userId=0;
-var sessionId="";
+// var sessionId="";
 var loggedIn=false;
 var email="";
 var counter=0;
@@ -13,23 +13,25 @@ var giftArray=[];
 router.get('/', function(req, res) {
   var holder=[];
   console.log('In the events controller');
-  if (userId ==0) {
+  if (req.session.user_id != undefined) {
     userId=req.session.user_id;
-    sessionId=req.sessionId;
+    // sessionId=req.sessionId;
     loggedIn=true;
     email=req.session.email;
   };
-    console.log('returned the user');
-    console.log(req.session.user_id);
-    if (req.session.user_id==undefined){
-      console.log('got to the error area');
+    // console.log('returned the user');
+    // console.log(req.session.user_id, userId);
+    // console.log(loggedIn,email);
+    if (userId==undefined || userId==0){
+      // console.log('got to the error area');
       res.render('./users/sign_in');
-    }else {
-      userId=req.session.user_id;
-      sessionId=req.sessionId;
-      loggedIn=true;
-      email=req.session.email;
     }
+    // else {
+    //   userId=req.session.user_id;
+    //   // sessionId=req.sessionId;
+    //   loggedIn=true;
+    //   email=req.session.email;
+    // }
   return models.User.findOne({
     where:{
       id:userId
@@ -60,13 +62,13 @@ router.get('/', function(req, res) {
             }else {
               eventArray[j].purchased='No';
             }
-          console.log('eventArray '+j);
-          console.log(eventArray[j].max_price);
+          // console.log('eventArray '+j);
+          // console.log(eventArray[j].max_price);
           }
           if (eventArray.length>0){doThey=true};
           res.render('./gifts/index', {
             eventdisp:eventArray,
-            username:sessionId,
+            username:email,
             logged_in: loggedIn,
             eventsExist:doThey,
             id:userId
@@ -75,7 +77,7 @@ router.get('/', function(req, res) {
       }else{
           res.render('./gifts/index', {
             eventdisp:eventArray,
-            username:sessionId,
+            username:email,
             logged_in: loggedIn,
             eventsExist:doThey,
             id:userId
