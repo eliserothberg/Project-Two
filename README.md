@@ -20,7 +20,7 @@ With a little input from you, we’ll make sure you remember to get that special
 
 UNDER THE HOOD:
 
-eMInder uses ````sequelize```` within an ````express```` application, and is deployed through ````Heroku```` and utilizes ```MySQL``` and a a Sequelize ORM with the add on ```JAWSBD``` as well as ```Heroku Scheduler```.
+eMInder uses ````Sequelize```` within an ````Express```` application, and is deployed through ````Heroku```` and utilizes ```MySQL``` and a Sequelize ORM with the Heroku add on ```JAWSBD``` as well as Heroku's ```Scheduler```.
 
 We utilize the following dependencies:
 
