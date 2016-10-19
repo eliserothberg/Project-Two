@@ -1,5 +1,3 @@
-'use strict';
-
 var Nightmare = require('nightmare');
 var should = require('chai').should();
 
