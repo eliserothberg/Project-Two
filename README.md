@@ -26,20 +26,21 @@ We utilize the following dependencies:
 
 - ````bcryptjs````
 - ````body-parser````
+- ````chai````
 - ````cookie-parser````
 - ````debug````
 - ````express````
 - ````express-handlebars````
 - ````express-session````
 - ````method-override````
+- ````mocha````
 - ````morgan````
 - ````mysql````
+- ````nightmare````
+- ````nodemailer````
+- ````nodemailer-express-handlebars````
 - ````sequelize````
 - ````sequelize-cli````
-- ````mocha````
-- ````chai````
-- ````nightmare````
-
 
 
 
