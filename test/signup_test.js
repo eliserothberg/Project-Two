@@ -3,63 +3,34 @@
 var Nightmare = require('nightmare');
 var should = require('chai').should();
 
-
-
-
-describe('eMinder', function() {
+describe('Try to sign up but told you are a registered user', function() {
   this.timeout(10000);
-
-  it('should go to log in page', function(done) {
+ 
+  it('should try to sign in as new user but already registered', function(done) {
     var nightmare = new Nightmare({
       show: true
     });
-    var login = '#logging';
     nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com/users/sign-in/')
-      .wait(login)
-      .click(login)
-      // .wait('a[href*="/users/sign-in"]')
+      .goto('https://pure-scrubland-84099.herokuapp.com/users/new')
+      .wait('a[href*="/users/new"]')
+      .click('a[href*="/users/new"]')
+      .wait('#un')
+      .type('#un', 'Bob')
+      .type('#em', 'bob@gmail.com')
+      .type('#pass', 'bob')
+      .click('.button_base.b05_3d_roll')
+      .wait('.occHead')
       .evaluate(function() {
-        return document.title;
+        return document.querySelectorAll('.occHead')[0].innerText;  
       })
       .end()
       .then(function(result) {
-        result.should.equal('Log in to eMinder');
+        result.should.contain('');
         done();
       })
       .catch(function(err) {
-        console.error("Go to log in not working");
-      });
-  });
-
-  it('should present events page after login', function(done) {
-    var nightmare = new Nightmare({
-      show: true
-    });
-    var login = '#logging';
-    nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com/users/sign-in/')
-      .wait('a[href*="https://pure-scrubland-84099.herokuapp.com/users/sign-in/"]')
-      .click('a[href*="https://pure-scrubland-84099.herokuapp.com/users/sign-in/"]')
-      .wait('#em_logging')
-      .type('#em_logging', 'bob@gmail.com')
-      .type('#pass_logging', 'bob')
-      .click('#signIn_logging')
-      // .wait('div#form-group.aname')
-      // .evaluate(function() {
-      //   return document.querySelectorAll('div#form-group.aname').length;
-      // })
-      .end()
-      .then(function(result) {
-        result.should.equal('Signed in');
-        done();
-      })
-      // .then(function(count) {
-      //   count.should.be.above(1);
-      //   done();
-      // })
-      .catch(function(err) {
-        console.error("Log in not working");
+        console.error("new user already registered not working");
+        done(err);
       });
   });
 });
