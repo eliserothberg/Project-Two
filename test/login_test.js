@@ -1,3 +1,37 @@
+var Nightmare = require('nightmare');
+var nightmare = Nightmare({ show: true })
+
+should = require('chai').should();
+
+nightmare
+  .goto('https://pure-scrubland-84099.herokuapp.com/')//nightmare allows us to put a URL
+  
+  .click('#myBtn2')//then click it
+  .wait('.window')//wait for .window to load
+  .type('#em', 'montalvocode@yahoo.com')
+  .type('#pass', 'password')
+  .click('.button_base.b05_3d_roll')
+  .wait('.create-update-form')//wait for .create-update-form to load
+  //this line says in the URL above in the form with an action  /search, type 'github nightmare'. So it searches for it.
+  .evaluate(function () {
+    return document.title;
+    
+  })
+  .end()
+  .then(function (result) { //this is the result data for that data
+    result.should.equal('E-Mider');
+    console.log(result)
+  })
+  .catch(function (error) {
+    console.error('Search failed:', error);
+  });
+
+//run node example.js
+
+//What we accomplish is to be able to do functional testing. 
+
+
+
 // 'use strict';
 
 // var Nightmare = require('nightmare'),
