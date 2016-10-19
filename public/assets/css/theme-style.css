@@ -56,10 +56,13 @@ hr {
 input {
   background-color: transparent;
 }
+label {
+  margin-bottom: 0px;
+}
 li {
-  max-width: 37%;
-  margin-left: 38px;
-  margin-top: 15px;
+  /*max-width: 37%;*/
+  max-width: 216px;
+  margin: 4px;
   box-shadow: 2px 2px black;
   text-align: left;
   border: 1px solid black;
@@ -76,7 +79,7 @@ ul {
   overflow-y: scroll;
   min-height: 242px;
   max-height: 500px;
-  margin-top: -10px;
+  margin-left: -40px;
 }
 ul ol {
   min-height: 20%;
@@ -96,8 +99,11 @@ video {
   float: left;
 }
 #bogus {
-  float: left;
-  width: 150px;
+  float: right;
+  position: fixed;
+  bottom: 6.3em;
+  right: 50px;
+  transform: rotate(25deg);
 }
 #butDiv {
   float: left;
@@ -107,6 +113,9 @@ video {
   top: 2.8em;
   right: 2em;
   width: 450px;
+}
+#creater {
+  border: 1px solid black;
 }
 #e {
   font-family: caviar !important;
@@ -125,7 +134,7 @@ video {
   margin-top: 0px;
   position: fixed;
   left: .5em;
-  top: .55em;
+  top: .6em;
   color: #00701e;
 }
 #hidden {
@@ -133,9 +142,9 @@ video {
 }
 #icon {
   position: fixed;
-  bottom: 2.8em;
-  right: 2.2em;
-  width: 300px;
+  bottom: 3.5em;
+  right: 4em;
+  width: 150px;
 }
 #login {
   color: khaki;
@@ -166,6 +175,9 @@ video {
 #right {
   background-color: black;
   text-align: right;
+}
+#signin {
+  border: 1px solid black;
 }
 #slogan {
   position: fixed;
@@ -297,7 +309,7 @@ video {
 }
 .fa-bolt:before {
   font-size: 150px;
-  color: white;
+  color: crimson;
   text-shadow: 1px 1px black;
 }
 .form-control {
@@ -309,7 +321,7 @@ video {
 .glyphicon.glyphicon-calendar {
   font-size: 150px;
   color: white;
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 2px black;
 }
 .header {
   padding: 1em 0;
@@ -358,9 +370,10 @@ background-color: white;
   -ms-box-shadow: none;
 }
 .occHead {
-  padding-top: 8px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   color: white;
+  font-family: walk;
   background-color: black;
   text-align: center;
 }
@@ -532,12 +545,14 @@ form > div > label > input:focus, form > div > label > select:focus
   .jumbotron {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-top: 2% !important;
   }
   .container .jumbotron {
     padding-right: 20px;
     padding-left: 20px;
   }
 }
+
 @media screen and (max-width:640px) {
   .container {
     width: 80%;
