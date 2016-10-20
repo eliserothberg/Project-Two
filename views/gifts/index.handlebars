@@ -1,14 +1,15 @@
 <body>
-    <video id="bgVideo" preload="true" autoplay loop muted>
+<!--     <video id="bgVideo" preload="true" autoplay loop muted>
         <source src="assets/images/main.mp4" type="video/mp4">
     </video>
-
+ -->
     <!----start-bg---->
     <div class="bg">
         <div class="container">
             <div class="jumbotron">
                 <div>
                   <h1 id="heads"><span class="redText" id="e">e</span>MINDER</h1>
+                  <h2> Welcome {{this.username}} </h2>
                 </div>
                 <h3 class="occHead">EVENTS</h3>
                 <div class="page-header" id="mainpage">
@@ -33,7 +34,17 @@
                                     <h5><span class="bolden">Max Price:</span>${{this.max_price}}
                                     <span class="bolden">Purchased:</span>
                                     {{this.purchased}}</h5>
-                                </li>
+
+                                    <h5><span class="bolden">Notify Date:</span>{{this.notify_date}}
+                                    </h5>
+
+                                    <form class="create-update-form" action="events/delete/{{this.id}}" method="POST">
+                                      <button class="button_base b05_3d_roll" type="submit">
+                                        <div>Delete Event</div>
+                                        <div>Delete Event</div>
+                                      </button>
+                                    </form>
+                                </li> 
                             {{/each}}
                         </ul>
                     {{/if}}
@@ -80,12 +91,23 @@
                           </div>
                         </label>
                       </div>
-
+                      <div class="col-3">
+                        <label>
+                          Date to Notify
+                          <input type="date" id="adatenote" tabindex="2" name="datenote" required>
+                        </label>
+                      </div>
                         <button class="button_base b05_3d_roll" type="submit">
                           <div>Add Event</div>
                           <div>Add Event</div>
                         </div>
                         </button>
+                    </form>
+                    <form class="create-update-form" action="events/deleteaccount/" method="POST">
+                      <button class="button_base b05_3d_roll" type="submit">
+                        <div>Delete Account</div>
+                        <div>Delete Account</div>
+                      </button>
                     </form>
                 {{/if}}
 
