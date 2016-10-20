@@ -41,7 +41,7 @@ router.get('/', function(req, res) {
     return user.getEvents();
   }).then(function(events){
     console.log('in the events');
-    console.log(events);
+    // console.log(events);
     counter=0;
     giftArray=[];
     // clear event array
@@ -152,16 +152,18 @@ router.get('/signout', function(req,res){
 // });
 
 
-router.delete('/delete/:id', function(req,res) {
+router.post('/delete/:id', function(req,res) {
+  console.log('in the delete function');
+  console.log(req.params.id);
+  // console.log(req);
   //Delete event based on the id passed in the url
   models.Event.destroy({
     where: {
       id: req.params.id
     }
   })
-  // connect it to this .then.
   .then(function() {
-    res.redirect('/');
+    res.redirect('/events');
   });
 
 });

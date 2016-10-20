@@ -33,7 +33,13 @@
                                     <h5><span class="bolden">Max Price:</span>${{this.max_price}}
                                     <span class="bolden">Purchased:</span>
                                     {{this.purchased}}</h5>
-                                </li>
+                                    <form class="create-update-form" action="events/delete/{{this.id}}" method="POST">
+                                      <button class="button_base b05_3d_roll" type="submit">
+                                        <div>Delete Event</div>
+                                        <div>Delete Event</div>
+                                      </button>
+                                    </form>
+                                </li> 
                             {{/each}}
                         </ul>
                     {{/if}}
