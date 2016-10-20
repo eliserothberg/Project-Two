@@ -23,7 +23,7 @@ describe('Email test', function() {
     })
     .end()
     .then(function (result) { //this is the result data for that data
-      result.should.equal('E-Minder');
+      result.should.equal('eMinder');
       console.log(result);
       done();
     })
