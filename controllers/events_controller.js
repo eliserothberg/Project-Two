@@ -1,6 +1,7 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
+var string = require('string');
 var eventArray = [];
 var userId=0;
 // var sessionId="";
@@ -55,6 +56,8 @@ router.get('/', function(req, res) {
         .then(function(assoc){
           for (var j=0;j<events.length;j++){
             eventArray[j]=events[j].dataValues;
+            // var lastEat=RowDataPacket.updatedAt;
+            eventArray[j].event_date=string(eventArray[j].event_date).left(16).s;
             eventArray[j].gift_name=giftArray[j].gift_name;
             eventArray[j].max_price=giftArray[j].max_price;
             if (giftArray[j].purchased){
