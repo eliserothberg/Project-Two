@@ -63,8 +63,8 @@ router.get('/', function(req, res) {
             // var lastEat=RowDataPacket.updatedAt;
             // console.log('event date before truncate');
             // console.log(eventArray[j].event_date);
-            eventArray[j].event_date=string(eventArray[j].event_date).left(16).s;
-            eventArray[j].notify_date=string(eventArray[j].notify_date).left(16).s;
+            // eventArray[j].event_date=string(eventArray[j].event_date).left(16).s;
+            // eventArray[j].notify_date=string(eventArray[j].notify_date).left(16).s;
             // console.log('event date after truncate');
             // console.log(eventArray[j].event_date);
             // var current=Date.now();
