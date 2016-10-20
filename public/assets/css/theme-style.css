@@ -46,7 +46,8 @@ h3 {
   margin-top: 0px;
 }
 h5 {
-  margin-left: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
   margin-top: 2px;
   margin-bottom: 2px;
 }
@@ -62,7 +63,7 @@ label {
   margin-bottom: 0;
 }
 li {
-  max-width: 216px;
+  max-width: 220px;
   margin: 4px;
   box-shadow: 2px 2px black;
   text-align: left;
@@ -70,6 +71,7 @@ li {
   font-family: walk;
   float: left;
   list-style: none;
+  position: relative;
 }
 p {
   font-family: walk;
@@ -121,6 +123,18 @@ video {
 #e {
   font-family: caviar !important;
 }
+#eventRem {
+  margin-bottom: -4px;
+  padding: 2px 4px;
+  color: crimson;
+  background-color: transparent;
+  border-radius: 0px;
+  float: right;
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+}
+
 #heads {
   font-family: caviar;
   font-size: 3.0em;
@@ -173,6 +187,12 @@ video {
   overflow-x: hidden;
   overflow-y: auto;
 }
+#remEvent {
+  width: 25%;
+  float: right;
+  border: none;
+}
+
 #right {
   background-color: black;
   text-align: right;
@@ -190,6 +210,11 @@ video {
   font-size: 25px;
   text-align: right;
 }
+#welBann {
+  float: right;
+  margin-top: -40px;
+}
+
 .back {
   width: 33%;
   height: 200px;
@@ -441,7 +466,7 @@ form
   border: 1px solid #E4E4E4;
   border-radius: 0px;
   font-size: 0;
-  min-height: 120px;
+  /*min-height: 120px;*/
 }
 form > div
 {
