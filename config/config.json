@@ -1,11 +1,8 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
+
     "password": "!!CRUMBLE!@8i6",
-=======
-    "password": "password",
->>>>>>> master
     "database": "eMinder",
     "host": "127.0.0.1",
     "dialect": "mysql"
