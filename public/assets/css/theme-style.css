@@ -58,9 +58,10 @@ input {
 }
 label {
   margin-bottom: 0px;
+  font-size: .8em;
+  margin-bottom: 0;
 }
 li {
-  /*max-width: 37%;*/
   max-width: 216px;
   margin: 4px;
   box-shadow: 2px 2px black;
@@ -72,7 +73,7 @@ li {
 }
 p {
   font-family: walk;
-  color: white;
+  color: black;
 }
 ul {
   list-style:none;
@@ -175,6 +176,7 @@ video {
 #right {
   background-color: black;
   text-align: right;
+  color: #00701e;
 }
 #signin {
   border: 1px solid black;
@@ -216,8 +218,9 @@ video {
   color: black;
 }
 .buttonGroup {
-  font-size: 13px;
   margin: 2px;
+  min-width: 200px;
+  font-family: Source Sans Pro, Arial, sans-serif;
 }
 .button_base {
   margin-top: 2.5%;
@@ -408,6 +411,9 @@ background-color: white;
 .well {
   padding: 0px;
   margin-bottom: 5px;
+}
+.whiteText {
+  color: white !important;
 }
 .window {
   width: 400px;
