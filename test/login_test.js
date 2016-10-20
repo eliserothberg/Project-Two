@@ -18,7 +18,7 @@ describe('Registered user logs in, gets taken to events page', function() {
       })
       .end()
       .then(function(result) {
-        result.should.equal('E-Minder');
+        result.should.equal('eMinder');
         done();
       })
       .catch(function(err) {
