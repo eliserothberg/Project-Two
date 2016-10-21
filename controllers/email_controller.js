@@ -25,13 +25,7 @@ var options = {//the plugin options
        extName: '.hbs'
     };
 
-
-
 var exports = module.exports = {};
-
-
-
-
 
 exports.dailyEmail = function (req, res) {
     console.log('I am the daily email export');
@@ -79,11 +73,37 @@ exports.dailyEmail = function (req, res) {
                 // res.redirect('/');
             }
         });
-
-
-    } 
-
-    })
+      } 
+  })
 };
 
+function sendEmails() {
+  console.log('in the sendEmails function');
+  console.log('');
+  return models.Event.findAll({
+    where:{
+    }
+  })
+  .then(function(events){
+    for (var i=0;i<events.length;i++){
+      console.log(events[i].recipient_name,events[i].event_date, events[i].notify_date, events[i].email_sent);
+        var current=Date.now();
+        var currentDate=new Date(current);
+        var dateThen=new Date(events[i].notify_date);
+        console.log(currentDate, dateThen);
+        if (currentDate < dateThen){
+          console.log('The current date is ealier than the notify date - no e-mail should be sent');
+          console.log('');
+        }
+        if (currentDate >= dateThen && !events[i].email_sent){
+          console.log('The current date is after or on the notify date, email should be sent for:');
+          console.log(events[i].recipient_name,events[i].event_type);
+          console.log('');
+          // Need to update the email_sent boolean here.
+        }
+    }
+  });
+  console.log('leaving the sendEmails function');
+   return true;
+}
 
