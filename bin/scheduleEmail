@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-console.log("=======================================scheduleEmail");
+// console.log("=======================================scheduleEmail");
 
-var emailRun = require('./scheduleEmail.js')
+var dailyEmail = require('./scheduleEmail.js')
 function email_function_will_go_here() {
-emailRun();
+dailyEmail();
 console.log('* * * * * * * * * ');
 
 }
