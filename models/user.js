@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
-    username: DataTypes.STRING,
+    username: DataTypes.STRING, 
     email: DataTypes.STRING,
     password_hash: DataTypes.STRING,
     active: DataTypes.BOOLEAN
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        User.belongsToMany(models.Event, {through: models.Userevents, unique:false});
+        User.hasMany(models.Event, {foreignKey: 'user_id'});
         // User.hasMany(models.Event, {onDelete: 'cascade', hooks:true});
         // User.hasMany(models.Gift, {
         //   onDelete: "CASCADE",

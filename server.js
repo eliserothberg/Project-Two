@@ -32,6 +32,8 @@ var gifts_controller = require('./controllers/gifts_controller');
 //   })
 // }
 
+var daily = require('./bin/scheduleEmail.js');
+daily.dailyEmail();
 // //allows foreign keys
 // sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 var app = express();

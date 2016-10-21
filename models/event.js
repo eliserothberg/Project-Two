@@ -8,13 +8,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     recipient_name: DataTypes.STRING,
     event_date: {
-      type:DataTypes.DATEONLY,
+      type:DataTypes.DATEONLY
     },
     event_type: DataTypes.STRING,
     deletedAt: DataTypes.DATE,
     user_id: DataTypes.INTEGER,
-    notify_date:DataTypes.DATEONLY,
-    email_sent:DataTypes.BOOLEAN
+    notify_date: DataTypes.DATEONLY,
+    email_sent: DataTypes.BOOLEAN
   }, {
   
     // don't delete database entries but set the newly added attribute deletedAt
@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        Event.belongsToMany(models.User, {through: models.Userevents, unique:false});
+        Event.belongsTo(models.User, {foreignKey: 'user_id'});
         Event.belongsToMany(models.Gift, {through: models.Eventgifts, unique:false});
         // Event.hasOne(models.Gift);
 
