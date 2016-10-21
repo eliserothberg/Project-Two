@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var emailer = require('server.js')
+var bob = require('../controllers/email_controller.js')
 function email_function_will_go_here() {
 	emailer();
 dailyEmail();
