@@ -1,8 +1,6 @@
-#!/usr/bin/env node
 
 // 'use strict';
 
-function email_function_will_go_here() {
 
 var models  = require('../models');
 var express = require('express');
@@ -88,7 +86,5 @@ exports.dailyEmail = function (req, res) {
 
     })
 };
-}
-email_function_will_go_here();
 
 
