@@ -1,4 +1,5 @@
 'use strict';
+console.log('*** email_controller');
 
 var models  = require('../models');
 var express = require('express');
@@ -33,7 +34,7 @@ var exports = module.exports = {};
 
 
 exports.dailyEmail = function (req, res) {
-    console.log('I take care of the email functionality!');
+    console.log('I am the daily email export');
     return models.User.findAll({
       include:[ models.Event]
     })  
