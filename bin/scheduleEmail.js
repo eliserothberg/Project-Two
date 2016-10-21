@@ -80,4 +80,3 @@ exports.dailyEmail = function (req, res) {
     })
 };
 
-// module.exports = dailyEmail;
