@@ -47,20 +47,20 @@
                     {{/if}}
                   </div>
                     <h3 class="occHead">ADD AN OCCASION</h3>
-                    <form class="create-update-form" action="events/create" method="POST">
-                      <div class="col-3">
+                    <form class="create-update-form" id="eventFrm" action="events/create" method="POST">
+                      <div class="col-4">
                         <label>
                           Occasion
                           <input placeholder="What's the deal?" tabindex="1" id="atype" name="type" required>
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
                           EVENT Date
                           <input type="date" id="adate" tabindex="2" name="date" required>
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
                           NOTIFICATION DATE
                           <input type="date" id="adatenote" tabindex="2" name="datenote" required>
@@ -93,7 +93,7 @@
                             </div>
                         </label>
                       </div>
-                        <button class="button_base b05_3d_roll" type="submit">
+                        <button id="eventAdd" class="button_base b05_3d_roll" type="submit">
                           <div>Add Event</div>
                           <div>Add Event</div>
                         </div>
@@ -106,13 +106,6 @@
                       </button>
                     </form> --}}
                 {{/if}}
-
-                <!-- <div id="butDiv">
-                  <div class="button_base b05_3d_roll" data-toggle="modal" data-target="#deletEmodal" href="#">
-                        <div>Delete Event</div>
-                        <div>Delete Event</div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
