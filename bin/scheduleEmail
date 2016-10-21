@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-
+var emailRun = require('../scheduleEmail.js')
 function email_function_will_go_here() {
+emailRun();
 
-
-return dailyEmail;
 }
 email_function_will_go_here();
-
+process.exit();
 

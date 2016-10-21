@@ -1,7 +1,6 @@
 
 'use strict';
 
-
 var models  = require('../models');
 var express = require('express');
 
@@ -26,13 +25,7 @@ var options = {//the plugin options
 		   extName: '.hbs'
 		};
 
-
-
 var exports = module.exports = {};
-
-
-
-
 
 exports.dailyEmail = function (req, res) {
     console.log('**** * * I am the dailyEmail function');
@@ -87,4 +80,4 @@ exports.dailyEmail = function (req, res) {
     })
 };
 
-
+module.exports = emailRun;
