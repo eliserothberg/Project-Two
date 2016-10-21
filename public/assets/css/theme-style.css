@@ -204,6 +204,12 @@ video {
   overflow-y: auto;
   background: transparent;
 }
+#optionBut {
+  margin-right: 1%;
+}
+#option {
+  background-color: transparent;
+}
 #remEvent {
   width: 25%;
   float: right;
@@ -211,9 +217,9 @@ video {
 }
 
 #right {
-  background-color: black;
+  background-color: transparent;
   text-align: right;
-  color: #00701e;
+  color: white
 }
 #signin {
   border: 1px solid black;

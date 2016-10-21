@@ -28,12 +28,45 @@ Here is the main HTML where handlebars will render to
 
 			{{#if logged_in}}
 			<p id="right">
-				<span class="whiteText">LOGIN:   </span> {{this.username}} <br>
 				<a href="/users/sign-out">Sign Out</a>
+				<br>
+				<button id="optionBut" href="#"/><i class="fa fa-cog" id="#option" aria-hidden="true"></i></button>
 			</p>
 			{{/if}}
 		<!-- </p> -->
 
 		{{{ body }}}
+
+		<!--//OPTIONS MODAL-->
+		<div class="modal fade" id="optModal" role="dialog">
+				<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">OPTIONS</h4>
+								</div>
+								<div class="modal-body">
+									<p>DELETE ACCOUNT</p>
+									<form class="create-update-form" action="events/deleteaccount/" method="POST">
+									  <button class="button_base b05_3d_roll" type="submit">
+									    <div>Delete Account</div>
+									    <div>Delete Account</div>
+									  </button>
+									  </form>
+								</div>
+								<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+						</div>
+				</div>
+		</div>
+
+		<script>
+				$(document).ready(function() {
+						$("#optionBut").click(function() {
+								$("#optModal").modal();
+						});
+				});
+		</script>
 	</body>
 </HTML>
