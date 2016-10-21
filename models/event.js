@@ -8,12 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     recipient_name: DataTypes.STRING,
     event_date: {
-      type:DataTypes.DATE,
+      type:DataTypes.DATEONLY,
       unique:false
     },
     event_type: DataTypes.STRING,
     deletedAt: DataTypes.DATE,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    notify_date: DataTypes.DATEONLY,
+    email_sent: DataTypes.BOOLEAN
   }, {
   
     // don't delete database entries but set the newly added attribute deletedAt
