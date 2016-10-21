@@ -3,7 +3,7 @@
         <source src="assets/images/main.mp4" type="video/mp4">
     </video>
 
-    <!----start-bg---->
+    <!--start-bg-->
     <div class="bg">
         <div class="container">
             <div class="jumbotron">
@@ -23,7 +23,7 @@
                                     <h5><span class="bolden">Recipient:</span>
                                     {{this.recipient_name}}</h5>
                                     <h5><span class="bolden">Date:</span>
-                                    {{this.event_date}}</h5>
+                                    {{dateFormat event_date "ddd, MMM D YYYY"}}</h5>
 
                                     <h5><span class="bolden">Occasion:</span>
                                     {{this.event_type}}</h5>
@@ -35,7 +35,7 @@
                                     <span class="bolden">Purchased:</span>
                                     {{this.purchased}}</h5>
 
-                                    <h5><span class="bolden">Notify Date:</span>{{this.notify_date}}
+                                    <h5><span class="bolden">Notify Date:</span>{{dateFormat notify_date "ddd, MMM D YYYY"}}
                                     </h5>
                                     <form class="create-update-form" id="remEvent" action="events/delete/{{this.id}}" method="POST">
                                       <button class="btn" id="eventRem" type="submit">

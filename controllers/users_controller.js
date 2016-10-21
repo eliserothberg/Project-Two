@@ -7,6 +7,10 @@ var app = express();
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+// var bob = require('hbs');
+
+// bob.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 
 var nodemailer = require('nodemailer');
 //reference the plugin 
@@ -23,7 +27,6 @@ var options = {//the plugin options
    viewPath: 'views/email/',
    extName: '.hbs'
 };
-
 
 var userId=0;
 console.log("*** users_controller")
@@ -64,8 +67,8 @@ console.log('at the bcrypt');
 					// we save the logged in status user id and email to the session
 	        req.session.logged_in = true;
 
-			// req.session.username = req.body.email;
-	        req.session.username = user.username;
+			req.session.username = req.body.email;
+          // req.session.username = user.username;
 	        req.session.user_id = user.id;
 	        userId=user.id;
 	        req.session.email = user.email;
@@ -84,17 +87,17 @@ console.log('at the bcrypt');
 // register a user
 router.post('/create', function(req,res) {
 	console.log('at the users');
-	console.log(req.body.username);
+	console.log(req.body.email);
 
 	return models.User.findAll({
-	    where: {email: req.body.username}
+	    where: {email: req.body.email}
  	})
  	.then(function(users) {
  		console.log('checked users');
  		console.log(users.length);
 		if (users.length > 0){
 			console.log(users)
-			res.send('we already have a username for this account')
+			res.send('we already have an email or username for this account')
 		}else{
 
 			var transporter = nodemailer.createTransport({
@@ -136,7 +139,6 @@ router.post('/create', function(req,res) {
 						bcrypt.hash(req.body.password, salt, function(err, hash) {
 							// create new user and store info
 							return models.User.create({
-								username: req.body.username,
 								email: req.body.email,
 								password_hash: hash
 							})
@@ -144,7 +146,6 @@ router.post('/create', function(req,res) {
 								//enter the user's session by setting properties to req.
 								// and save the logged in status to the session
 					          	req.session.logged_in = true;
-					          	req.session.username=user.username;
 								// req.session.username = user.username;
 					        	req.session.user_id = user.id;
 					          	req.session.email = user.email;
