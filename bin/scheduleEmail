@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-unction email_function_will_go_here() {
+function email_function_will_go_here() {
 emailRun();
 
 }
