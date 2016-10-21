@@ -1,5 +1,5 @@
 
-// 'use strict';
+'use strict';
 
 
 var models  = require('../models');
@@ -35,7 +35,7 @@ var exports = module.exports = {};
 
 
 exports.dailyEmail = function (req, res) {
-    console.log('I take care of the email functionality!');
+    console.log('**** * * I am the dailyEmail function');
     return models.User.findAll({
     	include:[ models.Event]
     })  
