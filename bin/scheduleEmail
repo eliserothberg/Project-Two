@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+// console.log("=======================================scheduleEmail");
+
+var dailyEmail = require('../controllers/email_controller.js')
+function email_function_will_go_here() {
+dailyEmail();
+console.log('* * * * * * * * * ');
+
+}
+email_function_will_go_here();
+process.exit();
+

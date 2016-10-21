@@ -1,4 +1,6 @@
+
 'use strict';
+
 var models  = require('../models');
 var express = require('express');
 
@@ -23,16 +25,10 @@ var options = {//the plugin options
 		   extName: '.hbs'
 		};
 
-
-
 var exports = module.exports = {};
 
-
-
-
-
 exports.dailyEmail = function (req, res) {
-    console.log('I take care of the email functionality!');
+    // console.log('**** * * I am the dailyEmail function');
     return models.User.findAll({
     	include:[ models.Event]
     })  
@@ -65,12 +61,12 @@ exports.dailyEmail = function (req, res) {
 	      		}
 	    	};
 
-	    	console.log(mailOptions);
+	    	// console.log(mailOptions);
 
 
 	    	transporter.sendMail(mailOptions, function(error, info){
 		        if(error){
-		            console.log(error);
+		            // console.log(error);
 		            // res.redirect('/');
 		        }else {
 		            console.log('Message sent: ' + info.response);
@@ -84,4 +80,4 @@ exports.dailyEmail = function (req, res) {
     })
 };
 
-
+// module.exports = dailyEmail;
