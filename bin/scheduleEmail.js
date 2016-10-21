@@ -37,8 +37,8 @@ exports.dailyEmail = function (req, res) {
     	include:[ models.Event]
     })  
 	.then(function(forgetful){
-
-		console.log('THIS IS FORGETFUL ' + JSON.stringify(forgetful[0]), null, 2);
+		// console.log(forgetful.length);
+		// console.log('THIS IS FORGETFUL ' + JSON.stringify(forgetful[0]), null, 2);
 
 		var transporter = nodemailer.createTransport({
 	        service: 'Gmail',
@@ -52,7 +52,9 @@ exports.dailyEmail = function (req, res) {
 		transporter.use('compile', hbs(options));
 
 
-	   for(var user in forgetful){
+	   for(var i = 0; i < forgetful.length; i++){
+	   		var user = forgetful[i];
+	   		
 	    	var mailOptions = {
 		        from: '"E-minder" <uclaProject2@gmail.com>',
 		        to: user.email,
@@ -62,6 +64,8 @@ exports.dailyEmail = function (req, res) {
 		        	user: user
 	      		}
 	    	};
+
+	    	console.log(mailOptions);
 
 
 	    	transporter.sendMail(mailOptions, function(error, info){

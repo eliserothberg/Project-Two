@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        Event.belongsToMany(models.User, {through: models.Userevents, unique:false});
+        Event.belongsTo(models.User, {foreignKey: 'user_id'});
         Event.belongsToMany(models.Gift, {through: models.Eventgifts, unique:false});
         // Event.hasOne(models.Gift);
 
