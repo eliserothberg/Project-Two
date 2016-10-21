@@ -46,7 +46,10 @@ app.set('views', path.join(__dirname, 'views'));
 //set up handlebars
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: {
+      dateFormat: require('handlebars-dateformat')
+    }
 }));
 app.set('view engine', 'handlebars');
 app.use(logger('dev'));
