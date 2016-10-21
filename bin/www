@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-console.log("got to the www file");
+console.log("_______________---------------------------got to the www file");
+var Sequelize = require('sequelize');
 
 //JAWSDB connection
 var models  = require('../models');
 var sequelizeConnection = models.sequelize
 
 
-var Sequelize = require('sequelize');
 //   connection;
 // if (process.env.JAWSDB_URL) {
 // }
@@ -27,7 +27,7 @@ var debug = require('debug')('express-example');
 var app = require('../server');
 
 //bring in the models we exported with index.js
-var models = require("../models");
+// var models = require("../models");
 
 //set the port of the app
 // app.set('port', process.env.PORT || 3000);

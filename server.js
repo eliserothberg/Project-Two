@@ -15,6 +15,7 @@ var application_controller = require('./controllers/application_controller');
 var events_controller = require('./controllers/events_controller');
 var users_controller = require('./controllers/users_controller');
 var gifts_controller = require('./controllers/gifts_controller');
+var email_controller = require('./controllers/email_controller');
 
 //JAWSDB connection
 // var models  = require('./models');
@@ -32,6 +33,8 @@ var gifts_controller = require('./controllers/gifts_controller');
 //   })
 // }
 
+var daily = require('./bin/scheduleEmail.js');
+daily.dailyEmail();
 // //allows foreign keys
 // sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 var app = express();
@@ -46,7 +49,10 @@ app.set('views', path.join(__dirname, 'views'));
 //set up handlebars
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: {
+      dateFormat: require('handlebars-dateformat')
+    }
 }));
 app.set('view engine', 'handlebars');
 app.use(logger('dev'));

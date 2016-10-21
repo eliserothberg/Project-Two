@@ -129,13 +129,13 @@ router.post('/create', function (req, res) {
     notify_date:req.body.datenote,
     email_sent:false
   })
-  .then(function(eventcreated) {
-    newEvent=eventcreated;
-    // console.log('creating the association')
-    // console.log(newEvent);
-    return eventcreated.addUser(eventcreated.user_id);
-  })
-  .then(function(eventassoc){
+  // .then(function(eventcreated) {
+  //   newEvent=eventcreated;
+  //   // console.log('creating the association')
+  //   // console.log(newEvent);
+  //   // return eventcreated.setUser(eventcreated.user_id);
+  // })
+  .then(function(event){
     // console.log('the event association');
     // console.log(eventassoc);
     var bought=false;
@@ -152,8 +152,10 @@ router.post('/create', function (req, res) {
     // console.log(giftcreated)
     // console.log('here is the event id');
     // console.log(newEvent.id);
-    return giftcreated.addEvent(newEvent.id).then (res.redirect('/events'));
-  })
+    return giftcreated.addEvent(newEvent.id);
+  }).then (function() {
+    res.redirect('/events');
+  });
 });
 
 router.get('/signout', function(req,res){
