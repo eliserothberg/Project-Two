@@ -25,7 +25,7 @@ describe('Try to sign up but told you are a registered user', function() {
       })
       .end()
       .then(function(result) {
-        result.should.contain('');
+        result.should.contain('CREATE');
         done();
       })
       .catch(function(err) {

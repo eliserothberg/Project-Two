@@ -7,6 +7,10 @@ var app = express();
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+// var bob = require('hbs');
+
+// bob.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 
 var nodemailer = require('nodemailer');
 //reference the plugin 
@@ -24,7 +28,6 @@ var options = {//the plugin options
    extName: '.hbs'
 };
 
-
 var userId=0;
 console.log("*** users_controller")
 
@@ -38,7 +41,7 @@ router.get('/sign-in', function(req,res) {
 
 router.get('/sign-out', function(req,res) {
   req.session.destroy(function(err) {
-     res.redirect('/events/signout');
+     res.redirect('/');
   })
 });
 

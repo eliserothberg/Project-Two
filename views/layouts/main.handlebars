@@ -4,19 +4,18 @@ Here is the main HTML where handlebars will render to
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
 		<head>
-			<title>E-Minder</title>
+			<title>eMinder</title>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="keywords" content="event, holiday, schedule, calendar, gift, shopping, alarm">
+			<meta name="description" content="Event creation and tracking">
 			<link href="../assets/css/bootstrap.css" rel='stylesheet' type='text/css'/>
 			<link href="../assets/css/theme-style.css" rel='stylesheet' type='text/css'/>
-			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-			<!-- <link href="/assets/css/style.css" rel="stylesheet" type="text/css" /> -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
-		</head>
-		<title>E-minder</title>
 	</head>
 	<body>
 		<!-- <p id="right"> -->
@@ -29,7 +28,7 @@ Here is the main HTML where handlebars will render to
 
 			{{#if logged_in}}
 			<p id="right">
-				Welcome {{email}}! <br>
+				<span class="whiteText">LOGIN:   </span> {{this.username}} <br>
 				<a href="/users/sign-out">Sign Out</a>
 			</p>
 			{{/if}}

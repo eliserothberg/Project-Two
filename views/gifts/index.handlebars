@@ -1,31 +1,18 @@
 <body>
-    <video id="bgVideo" controls preload="true" autoplay loop muted>
-        <source src="assets/images/Home_Page.mp4" type="video/mp4">
+    <video id="bgVideo" preload="true" autoplay loop muted>
+        <source src="assets/images/main.mp4" type="video/mp4">
     </video>
 
-    <!----start-bg---->
+    <!--start-bg-->
     <div class="bg">
         <div class="container">
             <div class="jumbotron">
-                <div class="well logo">
-                    <a href="#">
-                        <h1 id="heads">E-MINDER</h1>
-                    </a>
+                <div>
+                  <h1 id="heads"><span class="redText" id="e">e</span>MINDER</h1>
+                  <h2 id="welBann"> Welcome {{this.username}} </h2>
                 </div>
-                <h3 class="occHead">Gift tracking and Reminders</h3>
+                <h3 class="occHead">EVENTS</h3>
                 <div class="page-header" id="mainpage">
-                {{#if this.username}}
-                    Welcome
-                    {{this.username}}!
-                    {{this.id}}
-                    Register important dates and add gift tracking.
-                {{/if}}
-
-                {{#unless logged_in}}
-                    <p>
-                        Sign up
-                    </p>
-                {{/unless}}
 
                 {{#if logged_in}}
 
@@ -33,82 +20,92 @@
                         <ul>
                             {{#each eventdisp}}
                                 <li>
-                                    <h5><span class="boldText">Recipient:</span>
+                                    <h5><span class="bolden">Recipient:</span>
                                     {{this.recipient_name}}</h5>
-                                    <h5><span class="boldText">Date:</span>
-                                    {{this.event_date}}</h5>
+                                    <h5><span class="bolden">Date:</span>
+                                    {{dateFormat event_date "ddd, MMM D YYYY"}}</h5>
 
-                                    <h5><span class="boldText">Occasion:</span>
+                                    <h5><span class="bolden">Occasion:</span>
                                     {{this.event_type}}</h5>
 
-                                    <h5><h5><span class="boldText">Gift:</span>
+                                    <h5><h5><span class="bolden">Gift:</span>
                                     {{this.gift_name}}</h5>
 
-                                    <h5><span class="boldText">Max Price:</span>${{this.max_price}}
-                                    <span class="boldText">Purchased:</span>
+                                    <h5><span class="bolden">Max Price:</span>${{this.max_price}}
+                                    <span class="bolden">Purchased:</span>
                                     {{this.purchased}}</h5>
+
+                                    <h5><span class="bolden">Notify Date:</span>{{dateFormat notify_date "ddd, MMM D YYYY"}}
+                                    </h5>
+                                    <form class="create-update-form" id="remEvent" action="events/delete/{{this.id}}" method="POST">
+                                      <button class="btn" id="eventRem" type="submit">
+                                      <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span></button>
+                                    </form>
                                 </li>
                             {{/each}}
                         </ul>
                     {{/if}}
                   </div>
-                    <h3 class="occHead">Add an Occasion</h3>
-                    <form class="create-update-form" action="events/create" method="POST">
-                      <div class="col-3">
+                    <h3 class="occHead">ADD AN OCCASION</h3>
+                    <form class="create-update-form" id="eventFrm" action="events/create" method="POST">
+                      <div class="col-4">
                         <label>
                           Occasion
-                          <input placeholder="What's the deal?" tabindex="1" id="atype" name="type" />
+                          <input placeholder="What's the deal?" tabindex="1" id="atype" name="type" required>
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
-                          Date
-                          <input type="date" id="adate" tabindex="2" name="date"/>
+                          EVENT Date
+                          <input type="date" id="adate" tabindex="2" name="date" required>
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
+                        <label>
+                          NOTIFICATION DATE
+                          <input type="date" id="adatenote" tabindex="2" name="datenote" required>
+                        </label>
+                      </div>
+                      <div class="col-4">
                         <label>
                           Gift
-                          <input type="text" placeholder="What's The Gift?" tabindex="3" id="agift" name="gift"/>
+                          <input type="text" placeholder="What's The Gift?" tabindex="3" id="agift" name="gift">
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
                           Who's It For?
-                          <input type="text" placeholder="WHO?" tabindex="4" id="aname" name="name"/>
+                          <input type="text" placeholder="WHO?" tabindex="4" id="aname" name="name">
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
                           Max Price
-                          <input type="number" placeholder="99.99" tabindex="5" id="aprice" name="maxprice"/>
+                          <input type="number" placeholder="99.99" tabindex="5" id="aprice" name="maxprice">
                         </label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-4">
                         <label>
-                          Gift Status
-                          <div class="buttonGroup">
-                              <input type="radio" name="purchased" value="purchased">Purchased
-                              <input type="radio" name="purchased" value="notpurchased">Not-Purchased
-                          </div>
+                          Gift PURCHASED?
+                            <div class="buttonGroup">
+                              <input type="radio" required name="purchased" id="1" value="purchased"><label for="1">  YES </label>
+                              <input type="radio" required name="purchased" id="2" value="notpurchased"><label for="2">  NO </label>
+                            </div>
                         </label>
                       </div>
-
-                        <button class="button_base b05_3d_roll" type="submit">
-                          <!-- <div id="myBtn1" class="button_base b05_3d_roll" type="submit"> -->
+                        <button id="eventAdd" class="button_base b05_3d_roll" type="submit">
                           <div>Add Event</div>
                           <div>Add Event</div>
                         </div>
                         </button>
                     </form>
+                    {{!-- <form class="create-update-form" action="events/deleteaccount/" method="POST">
+                      <button class="button_base b05_3d_roll" type="submit">
+                        <div>Delete Account</div>
+                        <div>Delete Account</div>
+                      </button>
+                    </form> --}}
                 {{/if}}
-
-                <!-- <div id="butDiv">
-                  <div class="button_base b05_3d_roll" data-toggle="modal" data-target="#deletEmodal" href="#">
-                        <div>Delete Event</div>
-                        <div>Delete Event</div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

@@ -1,47 +1,42 @@
 <body>
-    <video id="bgVideo" controls preload="true" autoplay loop muted>
+    <video id="bgVideo" preload="true" autoplay loop muted>
         <source src="assets/images/festive.mp4" type="video/mp4">
     </video>
-
-    <!----start-bg---->
+    <!----//BEGIN BG---->
     <div class="bg">
-        <!----start-container---->
+        <!----//START CONTAINERr---->
         <div class="container">
-            <!---- start-header---->
+            <!----//START HEADER---->
             <div class="row header">
                 <div class="row">
                     <div class="col-md-6" id="logo">
-                        <!----start-logo---->
+                        <!----//LOGO---->
                         <div class="well logo">
-                                <h1 id="headsMain">E-MINDER</h1>
+                            <h1 id="headsMain"><span class="redText" id="e">e</span>MINDER</h1>
                         </div>
-                        <!----//End-logo---->
+                        <!----//LOGO---->
                     </div>
                     <div class="col-md-6" id="corner">
-                        <!---start-header-right--->
+                        <!---//BUTTON DIV--->
                         <div class="login-info well header-right">
-                            <!-- <div id="myBtn1" class="button_base b05_3d_roll" data-toggle="modal" data-target="#login-modal" href="#">
-                                <div>Login | Sign Up</div>
-                                <div>Login | Sign Up</div>
-                            </div> -->
                             <a href="/users/new">
-                            <div id="myBtn1" class="button_base b05_3d_roll">
-                                <div>Sign Up</div>
-                                <div>Sign Up</div>
-                            </div>
-                          </a>
-                          <a href="/users/sign-in">
-                            <div id="myBtn2" class="button_base b05_3d_roll">
-                                <div>Login</div>
-                                <div>Login</div>
-                            </div>
-                          </a>
+                                <div id="myBtn1" class="button_base b05_3d_roll">
+                                    <div>Sign Up</div>
+                                    <div>Sign Up</div>
+                                </div>
+                            </a>
+                            <a href="/users/sign-in">
+                                <div id="myBtn2" class="button_base b05_3d_roll">
+                                    <div>Login</div>
+                                    <div>Login</div>
+                                </div>
+                            </a>
                         </div>
-                        <!---//End-header-right--->
+                        <!---//END BUTTON DIV--->
                     </div>
                 </div>
             </div>
-            <!---- //End-header---->
+            <!---- //END HEADER---->
             {{#if logged_in}}
                 <form action="/people/create" method="POST">
                     <input type="text" name="name">
@@ -70,7 +65,7 @@
                                 <li>
                                     <form action="/people/{{this.id}}/tasks/create" method="POST" style="display: inline">
                                         <input type="text" name="task" placeholder="add task here">
-                                        <input type="submit" value"assign task">
+                                        <input type="submit" value "assign task">
                                     </form>
                                 </li>
                             {{/if}}
@@ -88,13 +83,13 @@
                 {{/each}}
             </ul>
 
-            <!-----slide-banner---->
+            <!-----SLIDE BANNER---->
             <div class="well slide-banner row" id="slogan">
                 <div class="slide-banner-left col-md-6">
                     <span></span>
                     <h1>When you need to remember...</h1>
                     <p class="shadow">and you can't remember
-                        <span class="redText">shit</span>.</p>
+                        <span class="redText">SHIT</span>.</p>
                     <p>
                         <div id="myBtn3" class="button_base b05_3d_roll" href="#">
                             <div>Read More</div>
@@ -113,183 +108,69 @@
         </div>
 
         <script>
-        	$(document).ready(function () {
-        		$("#myBtn3").click(function () {
-        			$("#myModal3").modal();
-        		});
-        	});
-        </script>
-        <script>
-        $(function() {
-
-            var $formLogin = $('#login-form');
-            var $formLost = $('#lost-form');
-            var $formRegister = $('#register-form');
-            var $divForms = $('#div-forms');
-            var $modalAnimateTime = 300;
-            var $msgAnimateTime = 150;
-            var $msgShowTime = 2000;
-
-            $("form").submit(function () {
-                switch(this.id) {
-                    case "login-form":
-                        var $lg_username=$('#login_username').val();
-                        var $lg_password=$('#login_password').val();
-                        if ($lg_username == "ERROR") {
-                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
-                        } else {
-                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
+            $(function() {
+                $('create-update').on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "/users/create",
+                        type: "POST",
+                        data: $("create-update").serialize(),
+                        success: function(data) {
+                            alert("Successfully submitted.")
                         }
-                        return false;
-                        break;
-                    // case "lost-form":
-                    //     var $ls_email=$('#lost_email').val();
-                    //     if ($ls_email == "ERROR") {
-                    //         msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
-                    //     } else {
-                    //         msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
-                    //     }
-                    //     return false;
-                    //     break;
-                    // case "register-form":
-                    //     var $rg_username=$('#register_username').val();
-                    //     var $rg_email=$('#register_email').val();
-                    //     var $rg_password=$('#register_password').val();
-                    //     if ($rg_username == "ERROR") {
-                    //         msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
-                    //     } else {
-                    //         msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
-                    //     }
-                    //     return false;
-                    //     break;
-                    default:
-                        return false;
-                }
-                return false;
-            });
-
-            $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
-            $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
-            // $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
-            // $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
-            // $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
-            $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
-
-            function modalAnimate ($oldForm, $newForm) {
-                var $oldH = $oldForm.height();
-                var $newH = $newForm.height();
-                $divForms.css("height",$oldH);
-                $oldForm.fadeToggle($modalAnimateTime, function(){
-                    $divForms.animate({height: $newH}, $modalAnimateTime, function(){
-                        $newForm.fadeToggle($modalAnimateTime);
                     });
                 });
-            }
-
-            function msgFade ($msgId, $msgText) {
-                $msgId.fadeOut($msgAnimateTime, function() {
-                    $(this).text($msgText).fadeIn($msgAnimateTime);
-                });
-            }
-
-            function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
-                var $msgOld = $divTag.text();
-                msgFade($textTag, $msgText);
-                $divTag.addClass($divClass);
-                $iconTag.removeClass("glyphicon-chevron-right");
-                $iconTag.addClass($iconClass + " " + $divClass);
-                setTimeout(function() {
-                    msgFade($textTag, $msgOld);
-                    $divTag.removeClass($divClass);
-                    $iconTag.addClass("glyphicon-chevron-right");
-                    $iconTag.removeClass($iconClass + " " + $divClass);
-          		}, $msgShowTime);
-            }
-        });
+            });
         </script>
-        			<!-- Modal for Read More-->
-        			<div class="modal fade" id="myModal3" role="dialog">
-        				<div class="modal-dialog">
-        					<div class="modal-content">
-        						<div class="modal-header">
-        							<button type="button" class="close" data-dismiss="modal">&times;</button>
-        							<h4 class="modal-title">ABOUT E-MINDER</h4>
-        						</div>
-        						<div class="modal-body">
-        							<p><a taget="_new" href="https://github.com/eliserothberg/Project-Two/blob/master/README.md">READ ME</a></p>
-        						</div>
-        						<div class="modal-footer">
-        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        						</div>
-        					</div>
-        				</div>
-        			</div>
-        			<!-- BEGIN # MODAL LOGIN -->
-        			<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        			    	<div class="modal-dialog">
-        						<div class="modal-content">
-        							<div class="modal-header" align="center">
-        								<img src="assets/images/logo.png">
-        								<img src="assets/images/logo.png">
-        								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        								</button>
-        							</div>
 
-        			                <!-- Begin # DIV Form -->
-        			                <div id="div-forms">
+        <script>
+            $(document).ready(function() {
+                $("#myBtn3").click(function() {
+                    $("#myModal3").modal();
+                });
+            });
+        </script>
 
-        			                    <!-- Begin # Login Form -->
-        			                    <form id="login-form">
-        					                <div class="modal-body">
-        							    		<div id="div-login-msg">
-        			                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-        			                                <span id="text-login-msg">Type your username and password.</span>
-        			                            </div>
-        							    		<input id="login_username" class="form-control" type="text" placeholder="Username" required>
-        							    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
-        			                            <div class="checkbox">
-        			                                <label>
-        			                                    <input type="checkbox"> Remember me
-        			                                </label>
-        			                            </div>
-        			        		    	</div>
-        							        <div class="modal-footer">
-        			                            <div>
-        			                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-        			                            </div>
-        							    	    <div>
-        			                                <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
-        			                            </div>
-        							        </div>
-        			                    </form>
-        			                    <!-- End # Login Form -->
-
-        			                    <!-- Begin | Register Form -->
-        			                    <form class="create-update-form" action="/users/create" method="POST" id="register-form" style="display:none;">
-        			            		    <div class="form-group">
-                                    <input id="un" class="form-control" type="text" name="username" placeholder="Username" required>
-        			                            <input id="em" class="form-control" type="text" name="email" placeholder="E-Mail" required>
-        			                            <input id="pass" class="form-control" type="password" name="pass" placeholder="Password" required>
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-                                        </div>
-        					    		    <div class="modal-footer">
-        			                            <div>
-        			                                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-        			                            </div>
-        			                            <div>
-        			                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
-          			                            </div>
-        					    		    </div>
-        			                    </form>
-        			                    <!-- End | Register Form -->
-
-        			                </div>
-        			                <!-- End # DIV Form -->
-
-        						</div>
-        					</div>
-        				</div>
-        			    <!-- END # MODAL LOGIN -->
+        <!--//READ MORE MODAL-->
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span class="redText">e</span><span="greenText">Minder</span></h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                      Never again feel that awful amalgamation of dread, guilt, and self-loathing because you forgot to get a gift for an important event! With a little input from you, we’ll make sure you remember to get that special gift- at the best price on the web- before the big day.
+                      </p>
+                      <p>
+                      Sign up and sign in securely with password protection that uses bcrypt with a 10-round salt. Create an event for which you want reminders and enter a specific gift or a category. If a category is entered, you will be presented with a choice of popular gifts generated using a custom API.
+                      </p>
+                      <p>
+                      Once a selection has been made, our custom API also searches XXXXXX sites for the best price of the item you’ve chosen. An email, generated with XXXXX, will be sent to you once a day with the event being tracked, the best web price for that option, a picture, and a link to the retailer.
+                      </p>
+                      <p>
+                      Your credit card information is secure because you never need to enter it to use the app.
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOGIN MODAL -->
+        <div class="modal fade" id="myModal3" role="dialog">
+            <form class="create-update-form" id="create-update" action="/users/create" method="POST">
+                <div class="modal-body">
+                    <input type="email" placeholder="email">
+                    <p>This service will notify you by email should any issue arise that affects your service.</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="button_base b05_3d_roll" type="submit"> -->
+                    <input id="button_base b05_3d_roll" type="submit" value="SUBMIT" class="btn">
+                </div>
+            </form>
+        </div>
 
 </body>

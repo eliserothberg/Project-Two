@@ -8,8 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     recipient_name: DataTypes.STRING,
     event_date: {
-      type:DataTypes.DATEONLY,
-      unique:false
+      type:DataTypes.DATEONLY
     },
     event_type: DataTypes.STRING,
     deletedAt: DataTypes.DATE,

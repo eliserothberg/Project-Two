@@ -1,28 +1,23 @@
-{{!-- 
-    <video id="bgVideo" controls preload="true" autoplay loop muted>
-        <source src="../assets/images/newy.mp4" type="video/mp4">
-    </video> --}}
-
 
 <div class="window">
-<h3 class="occHead">Create An Account</h3>
-<form class="create-update-form" action="/users/create" method="POST">
+<h3 class="occHead">CREATE ACCOUNT</h3>
+<form class="create-update-form" id="creater" action="/users/create" method="POST">
   <div class="col-3">
     <label>
       Username
-      <input placeholder="Ex. Haystaycks" tabindex="1" id="un" name="username" />
+      <input placeholder="Ex. Haystaycks" tabindex="1" id="un" name="username" required>
     </label>
   </div>
   <div class="col-3">
     <label>
       Email
-      <input type="text" id="em" tabindex="2" name="email"/>
+      <input type="email" id="em" tabindex="2" name="email" required>
     </label>
   </div>
   <div class="col-3">
     <label>
       Password
-      <input type="password" tabindex="3" id="pass" name="password"/>
+      <input type="password" tabindex="3" id="pass" name="password" required>
     </label>
   </div>
   <button class="button_base b05_3d_roll" type="submit">
