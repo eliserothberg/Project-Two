@@ -15,6 +15,7 @@ var application_controller = require('./controllers/application_controller');
 var events_controller = require('./controllers/events_controller');
 var users_controller = require('./controllers/users_controller');
 var gifts_controller = require('./controllers/gifts_controller');
+var email_controller = require('./controllers/email_controller');
 
 //JAWSDB connection
 // var models  = require('./models');

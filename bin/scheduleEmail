@@ -1,16 +1,10 @@
 #!/usr/bin/env node
-
-function email_function_will_go_here() {
-emailRun();
-
-}
-email_function_will_go_here();
-process.exit();
-
+console.log("=======================================scheduleEmail");
 
 var emailRun = require('./scheduleEmail.js')
 function email_function_will_go_here() {
 emailRun();
+console.log('* * * * * * * * * ');
 
 }
 email_function_will_go_here();
