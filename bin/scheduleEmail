@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // console.log("=======================================scheduleEmail");
 
-var dailyEmail = require('../email.controller.js')
+var dailyEmail = require('controllers/email.controller.js')
 function email_function_will_go_here() {
 dailyEmail();
 console.log('* * * * * * * * * ');
