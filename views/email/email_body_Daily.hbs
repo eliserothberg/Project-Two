@@ -4,7 +4,7 @@
 
 {{#each user.Events}}
 	
-	<p style="font-family: oksana; color:#4e4d4d;">Remember {{this.event_type}} on {{dateFormat event_date "ddd, MMM D YYYY"}} for {{this.recipient_name}}.</p>
+	<p style="font-family: oksana; color:#4e4d4d;">On {{dateFormat event_date "ddd, MMM D YYYY"}},  {{this.recipient_name}} has a(n) {{this.event_type}}.</p>
 	
 {{/each}}
 
