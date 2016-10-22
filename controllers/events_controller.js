@@ -58,6 +58,8 @@ router.get('/', function(req, res) {
     if (events.length>0){
         return findAssoc(events)
         .then(function(assoc){
+          console.log('Back in the function');
+          console.log(events.length);
           for (var j=0;j<events.length;j++){
             eventArray[j]=events[j].dataValues;
             // var lastEat=RowDataPacket.updatedAt;
@@ -78,6 +80,8 @@ router.get('/', function(req, res) {
             // if (currentDate < dateThen){
             //   console.log('The current date is earlier than the event date');
             // }
+            console.log('in the loop');
+            // console.log(giftArray[j].gift_name);
             eventArray[j].gift_name=giftArray[j].gift_name;
             eventArray[j].max_price=giftArray[j].max_price;
             if (giftArray[j].purchased){
@@ -88,9 +92,10 @@ router.get('/', function(req, res) {
           // console.log('eventArray '+j);
           // console.log(eventArray[j].max_price);
           }
-          sendEmails();
+          // sendEmails();
           if (eventArray.length>0){doThey=true};
           console.log('about to render');
+          // console.log(eventArray);
           res.render('./gifts/index', {
             eventdisp:eventArray,
             username:username,
@@ -135,15 +140,20 @@ router.post('/create', function (req, res) {
   //   // return eventcreated.setUser(eventcreated.user_id);
   // })
   .then(function(event){
-    // console.log('the event association');
-    // console.log(eventassoc);
+    console.log('the gift creation');
+    // console.log(req.body.gift);
+    // if (req.body.gift==''){
+    //   console.log('no gift');
+    //   req.body.gift="none";
+    // }
     var bought=false;
     if (req.body.purchased=="purchased") {bought=true};
     if (req.body.maxprice=='') {req.body.maxprice=0};
     return models.Gift.create({
       gift_name:req.body.gift,
       max_price:req.body.maxprice,
-      purchased:bought
+      purchased:bought,
+      user_id:userId
     });
   })
   .then(function(giftcreated){
@@ -226,44 +236,53 @@ function findAssoc(array){
     // find burger with the id of 'counter' in the table
     return models.Event.findOne({where: {id:array[counter].id}})
       .then (function(search){
-        // console.log('returned from the search');
-        // console.log(search.recipient_name);
+        console.log('returned from the search');
+        console.log(search.user_id);
         // get associated customers (sequelize created command)
-        return search.getGifts()
+        // return search.getGifts()
+        return models.Gift.findAll({
+          where:{user_id:search.user_id}
+        })
           .then(function(returned){
-            // console.log('returned with gifts');
+            console.log('returned with gifts');
+            // console.log(returned);
             if (returned !='') {
-              // console.log('got something');
+              console.log('got something');
               // var someArray=returned[0]['gift_name'];
-              // console.log(returned[0].gift_name);
+              console.log(returned[0].gift_name);
             }
             // console.log(gifts.dataValues.gift_name, gifts.dataValues.max_price, gifts.dataValues.purchased);
             // increment counter, push customer's name to associativity array
             // if the customer name string is empty (user has hit the 'Devour It!'
             // button without entering a name), add "No One" as the last eater
             counter+=1;
-            if (returned==''){
+            for (var i=0;i<returned.length;i++){
+
+            if (returned[i].dataValues.gift_name==''){
                 var objToPush ={
                   gift_name:'none',
                   max_price:'N/A',
                   purchased:false
                 };
-                // console.log('pushing nothing');
+                console.log('pushing nothing');
                 // console.log(objToPush);
                 giftArray.push(objToPush);
               } else {
+                console.log('got a gift');
+                console.log(returned[i].dataValues.gift_name);
                 var objToPush = {
-                  gift_name:returned[0].gift_name,
-                  max_price:returned[0].max_price,
-                  purchased:returned[0].purchased
+                  gift_name:returned[i].dataValues.gift_name,
+                  max_price:returned[i].dataValues.max_price,
+                  purchased:returned[i].dataValues.purchased
                 };
                 // console.log('pushing something');
                 // console.log(objToPush);
                 giftArray.push(objToPush);
               }
+            }
             // recursively call the array with the burgers array passed in on
             // initial call
-            return findAssoc(array);
+            return giftArray;
           });
       });
   } else {

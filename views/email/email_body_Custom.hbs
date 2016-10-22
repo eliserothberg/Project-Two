@@ -1,6 +1,6 @@
 
 
-<h4 style="font-family: oksana; color:#4e4d4d;">Hi there {{user.email}}!; Because you can't remenber shit; Here is your daily reminder.</h4><br/>
+<h4 style="font-family: oksana; color:#4e4d4d;">Hi there {{user.email}}!; Because you can't remember shit; Here is your daily reminder.</h4><br/>
 {{#each user.Events}}
 	<p style="font-family: oksana; color:#4e4d4d;">Remember that {{this.recipient_name}} has a {{this.event_type}}</p><br/>
 {{/each}}
