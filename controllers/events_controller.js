@@ -81,7 +81,7 @@ router.get('/', function(req, res) {
             //   console.log('The current date is earlier than the event date');
             // }
             console.log('in the loop');
-            console.log(giftArray[j].gift_name);
+            // console.log(giftArray[j].gift_name);
             eventArray[j].gift_name=giftArray[j].gift_name;
             eventArray[j].max_price=giftArray[j].max_price;
             if (giftArray[j].purchased){

@@ -14,13 +14,13 @@ it('should allow user to sign out', function(done) {
       .goto('https://pure-scrubland-84099.herokuapp.com/events')
       .wait('a[href*="/users/sign-out"]')
       .click('a[href*="/users/sign-out"]') 
-      .wait('.occHead')
+      .wait('.shadow')
       .evaluate(function() {
-        return document.querySelectorAll('.occHead')[0].innerText;
+        return document.querySelectorAll('.shadow')[0].innerText;
       })
       .end()
       .then(function(result) {
-        result.should.contain('');
+        result.should.contain('remember');
         done();
       })
       .catch(function(err) {
