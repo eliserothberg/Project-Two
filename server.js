@@ -16,30 +16,10 @@ var events_controller = require('./controllers/events_controller');
 var users_controller = require('./controllers/users_controller');
 var gifts_controller = require('./controllers/gifts_controller');
 var email_controller = require('./controllers/email_controller');
-// console.log('trying to call for e-mails');
-// events_controller.sendEmails();
 
-//JAWSDB connection
-// var models  = require('./models');
-// var sequelizeConnection = models.sequelize
-
-// var Sequelize = require('sequelize'),
-//   connection;
-// if (process.env.JAWSDB_URL) {
-// }
-// else {
-//   connection = new Sequelize('eMinder', 'root', 'password', {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     port: '3306'
-//   })
-// }
 
 var daily = require('./bin/scheduleEmail.js');
 console.log('about to call the e-mail');
-// daily.dailyEmail();
-// //allows foreign keys
-// sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 var app = express();
 
 // override POST to have DELETE and PUT
@@ -75,17 +55,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-
-
-// error handler
-// no stacktraces leaked to user unless in development environment
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: (app.get('env') === 'development') ? err : {}
-//   });
-// });
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function(){
 	console.log('App listening on PORT ' + PORT);
