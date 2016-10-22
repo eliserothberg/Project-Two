@@ -20,7 +20,7 @@ it('should allow user to sign out', function(done) {
       })
       .end()
       .then(function(result) {
-        result.should.contain('SIGN');
+        result.should.contain('');
         done();
       })
       .catch(function(err) {
