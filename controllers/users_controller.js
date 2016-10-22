@@ -13,7 +13,7 @@ app.set('view engine', 'handlebars');
 
 
 var nodemailer = require('nodemailer');
-//reference the plugin 
+//reference the plugin
 
 var hbs = require('nodemailer-express-handlebars');
 
@@ -58,7 +58,7 @@ console.log('at the sign in');
 			console.log('the user is null');
 			res.render('users/sign_in');
 		}
-console.log('at the bcrypt');	
+console.log('at the bcrypt');
 		// bcrypt compares user's password input with stored hash
     bcrypt.compare(req.body.password, user.password_hash, function(err, result) {
         if (result == true){
@@ -105,9 +105,9 @@ router.post('/create', function(req,res) {
 	        auth: {
 	            user: 'uclaProject2@gmail.com',
 	            pass: 'superpassword'
-	        } 
+	        }
 	    });
-	    //attach the plugin to the nodemailer transporter 
+	    //attach the plugin to the nodemailer transporter
 			transporter.use('compile', hbs(options));
 
 	    var mailOptions = {

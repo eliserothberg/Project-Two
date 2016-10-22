@@ -82,4 +82,3 @@ exports.dailyEmail = function (req, res) {
     })
 };
 
-// dailyEmail();
