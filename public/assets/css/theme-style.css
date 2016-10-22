@@ -600,7 +600,7 @@ form > div > label > input:focus, form > div > label > select:focus
     width: 100%;
   }
 }
-@media screen (max-width:768px) {
+@media screen and (max-width:768px) {
   .container {
     width: 80%;
   }
@@ -615,14 +615,17 @@ form > div > label > input:focus, form > div > label > select:focus
     width: 100%;
     margin: 1em 0;
   }
-  .slide-banner-right {
-    display: none;
-  }
   .slide-banner-left h1 {
     margin: 0;
   }
   .well {
     padding: 0;
+    }
+  #myBtn1 {
+    width: 30%;
+    }
+  #myBtn2 {
+    width: 30%;
     }
 }
 @media screen and (min-width:768px) {
@@ -682,17 +685,11 @@ form > div > label > input:focus, form > div > label > select:focus
   .login-info {
     text-align: center;
   }
-  .slide-banner {
-    text-align: center;
-  }
   .slide-banner-left p {
     color: #C5D2E5;
     font-size: 1.5em;
     width: 100%;
     margin: 1em 0;
-  }
-  .slide-banner-right {
-    display: none;
   }
   .slide-banner-left h1 {
     margin: 0;
@@ -715,6 +712,14 @@ form > div > label > input:focus, form > div > label > select:focus
     width: 46%;
     height: 150px;
     overflow: scroll;
+  }
+}
+@media screen and (max-width:575px) {
+  #myBtn1 {
+    width: 20%;
+  }
+  #myBtn2 {
+    width: 20%;
   }
 }
 @media (max-width:480px) {
