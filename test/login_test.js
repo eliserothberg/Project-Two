@@ -41,7 +41,7 @@ describe('Registered user logs in, gets taken to events page', function() {
       .click('.button_base.b05_3d_roll')
       .wait("#welBann")
       .evaluate(function() {
-        return document.querySelectorAll('div#welBann')[0].innerText;
+        return document.querySelectorAll('div#welBann').innerText;
       })
       .end()
       .then(function(result) {
