@@ -62,11 +62,11 @@ exports.dailyEmail = function (req, res) {
 	    	};
 
 	    	// console.log(mailOptions);
-	    	console.log(mailOptions.context);
+	    	console.log(mailOptions.context.user.dataValues);
 
 	    	transporter.sendMail(mailOptions, function(error, info){
 		        if(error){
-		            // console.log(error);
+		            console.log(error);
 		            // res.redirect('/');
 		        }else {
 		            console.log('Message sent: ' + info.response);
