@@ -53,7 +53,7 @@ router.post('/login', function(req, res) {
     where: {email: req.body.email}
   }).then(function(user) {
 console.log('at the sign in');
-console.log(user);
+// console.log(user);
 		if (user === null){
 			console.log('the user is null');
 			res.render('users/sign_in');
@@ -112,7 +112,8 @@ router.post('/create', function(req,res) {
 
 	    var mailOptions = {
 	        from: '"E-minder" <uclaProject2@gmail.com>',
-	        to: 'montalvocode@yahoo.com',//change this to req.body.email
+	        //'montalvocode@yahoo.com'
+	        to: req.body.email,
 	        subject: "Welcome to E-minder!",
 	        template: 'email_body',
 	        context: {
