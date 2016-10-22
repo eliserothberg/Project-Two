@@ -118,7 +118,7 @@ router.post('/create', function(req,res) {
 	        template: 'email_body',
 	        context: {
 	            username: req.body.username,
-	            event: 'sign-up'
+	            event: 'Birthday'
 	        }
 	    };
 
