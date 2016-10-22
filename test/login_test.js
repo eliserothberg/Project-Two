@@ -39,13 +39,13 @@ describe('Registered user logs in, gets taken to events page', function() {
       .type('#em', 'bob@gmail.com')
       .type('#pass', 'bob')
       .click('.button_base.b05_3d_roll')
-      .wait("#mainpage")
+      .wait(".occHead")
       .evaluate(function() {
-        return document.querySelectorAll('div#mainpage')[0].innerText;
+        return document.querySelectorAll('div.occHead')[0].innerText;
       })
       .end()
       .then(function(result) {
-        result.should.contain('Occasion');
+        result.should.contain('EVENTS');
         done();
       })
       .catch(function(err) {
