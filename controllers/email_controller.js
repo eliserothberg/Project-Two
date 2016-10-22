@@ -52,9 +52,9 @@ exports.dailyEmail = function (req, res) {
         var user = forgetful[i];
         
         var mailOptions = {
-            from: '"E-minder" <uclaProject2@gmail.com>',
+            from: '"eMinder" <uclaProject2@gmail.com>',
             to: user.email,
-            subject: "Your daily E-minder!",
+            subject: "Your daily eMinder!",
             template: 'email_body_Daily',
             context: {
               user: user

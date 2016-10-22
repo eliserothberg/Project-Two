@@ -111,14 +111,14 @@ router.post('/create', function(req,res) {
 			transporter.use('compile', hbs(options));
 
 	    var mailOptions = {
-	        from: '"E-minder" <uclaProject2@gmail.com>',
+	        from: '"eMinder" <uclaProject2@gmail.com>',
 	        //'montalvocode@yahoo.com'
 	        to: req.body.email,
-	        subject: "Welcome to E-minder!",
+	        subject: "Welcome to eMinder!",
 	        template: 'email_body',
 	        context: {
-	            username: req.body.email,
-	            event: 'Birthday'
+	            username: req.body.username,
+	            event: 'sign-up'
 	        }
 	    };
 
