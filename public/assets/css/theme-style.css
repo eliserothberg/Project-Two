@@ -98,6 +98,9 @@ video {
   z-index: -100;
   background-size: cover;
 }
+#delAcc {
+  color: red;
+}
 #eventAdd {
   margin: auto;
   position: absolute;
@@ -132,6 +135,15 @@ video {
 }
 #creater {
   border: 1px solid black;
+}
+#deletion {
+  border: none;
+}
+#dred {
+  background-color: red;
+}
+#dread {
+  background-color: red;
 }
 #e {
   font-family: caviar !important;
@@ -279,7 +291,6 @@ video {
   border: 0;
   font-size: 18px;
   position: relative;
-  /*width: 175px;*/
   width: 225px;
   height: 50px;
   text-align: center;
