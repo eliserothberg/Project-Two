@@ -1,7 +1,7 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
-var string = require('string');
+var daily = require('../bin/scheduleEmail.js');
 var eventArray = [];
 var userId=0;
 var username='';
@@ -11,30 +11,19 @@ var email="";
 var counter=0;
 var giftArray=[];
     console.log("****events_controller");
-
+sendEmails();
 router.get('/', function(req, res) {
   var holder=[];
   console.log('In the events controller');
   if (req.session.user_id != undefined) {
     userId=req.session.user_id;
     username=req.session.username;
-    // sessionId=req.sessionId;
     loggedIn=true;
     email=req.session.email;
   };
-    // console.log('returned the user');
-    // console.log(req.session.user_id, userId);
-    // console.log(loggedIn,email);
     if (userId==undefined || userId==0){
-      // console.log('got to the error area');
       res.render('./users/sign_in');
     }
-    // else {
-    //   userId=req.session.user_id;
-    //   // sessionId=req.sessionId;
-    //   loggedIn=true;
-    //   email=req.session.email;
-    // }
   return models.User.findOne({
     where:{
       id:userId
@@ -43,17 +32,11 @@ router.get('/', function(req, res) {
   .then(function(user) {
     return user.getEvents();
   }).then(function(events){
-    // console.log('in the events');
-    // console.log(events[(events.length-1)].event_date);
-    // console.log(events[(events.length-1)].recipient_date);
-    // console.log(events[(events.length-1)].event_type);
     counter=0;
     giftArray=[];
     // clear event array
     eventArray=[];
     var doThey=false;
-    // console.log('In yet again');
-    // console.log(events.length);
     console.log("* * * just before render -events controller");
     if (events.length>0){
         return findAssoc(events)
@@ -62,24 +45,6 @@ router.get('/', function(req, res) {
           console.log(events.length);
           for (var j=0;j<events.length;j++){
             eventArray[j]=events[j].dataValues;
-            // var lastEat=RowDataPacket.updatedAt;
-            // console.log('event date before truncate');
-            // console.log(eventArray[j].event_date);
-            // eventArray[j].event_date=string(eventArray[j].event_date).left(16).s;
-            // eventArray[j].notify_date=string(eventArray[j].notify_date).left(16).s;
-            // console.log('event date after truncate');
-            // console.log(eventArray[j].event_date);
-            // var current=Date.now();
-            // var currentDate=new Date(current);
-            // var dateThen=new Date(eventArray[j].event_date);
-            // console.log(currentDate, dateThen);
-            // console.log(current);
-            // if (currentDate >= dateThen){
-            //   console.log('The current date is later than the event date');
-            // }
-            // if (currentDate < dateThen){
-            //   console.log('The current date is earlier than the event date');
-            // }
             console.log('in the loop');
             console.log(giftArray[j].gift_name);
             eventArray[j].gift_name=giftArray[j].gift_name;
@@ -89,13 +54,9 @@ router.get('/', function(req, res) {
             }else {
               eventArray[j].purchased='No';
             }
-          // console.log('eventArray '+j);
-          // console.log(eventArray[j].max_price);
           }
-          // sendEmails();
           if (eventArray.length>0){doThey=true};
           console.log('about to render');
-          // console.log(eventArray);
           res.render('./gifts/index', {
             eventdisp:eventArray,
             username:username,
@@ -118,13 +79,7 @@ router.get('/', function(req, res) {
 
 router.post('/create', function (req, res) {
   var newEvent={};
-  // console.log('creating the event');
-  // console.log(req.body.gift);
-  // console.log(req.body.maxprice);
-  // console.log(req.body.purchased);
  //create event
- console.log('in the event creation');
- console.log(req.body.date);
   return models.Event.create({
     recipient_name: req.body.name,
     event_date: req.body.date,
@@ -133,21 +88,10 @@ router.post('/create', function (req, res) {
     notify_date:req.body.datenote,
     email_sent:false
   })
-  // .then(function(eventcreated) {
-  //   newEvent=eventcreated;
-  //   // console.log('creating the association')
-  //   // console.log(newEvent);
-  //   // return eventcreated.setUser(eventcreated.user_id);
-  // })
   .then(function(event){
     console.log('the gift creation');
     var eventId=event.id;
     console.log(eventId);
-    // console.log(req.body.gift);
-    // if (req.body.gift==''){
-    //   console.log('no gift');
-    //   req.body.gift="none";
-    // }
     var bought=false;
     if (req.body.purchased=="purchased") {bought=true};
     if (req.body.maxprice=='') {req.body.maxprice=0};
@@ -160,10 +104,6 @@ router.post('/create', function (req, res) {
     });
   })
   .then(function(giftcreated){
-    // console.log('creating the gift association');
-    // console.log(giftcreated)
-    // console.log('here is the event id');
-    // console.log(newEvent.id);
     return giftcreated.addEvent(newEvent.id);
   }).then (function() {
     res.redirect('/events');
@@ -174,27 +114,6 @@ router.get('/signout', function(req,res){
   userId=0;
   res.render('./users/sign_in');
 });
-// router.put('/update/:id', function(req,res) {
-  
-//   // =========
-//   // update tracking status of gift
-//   // not sure how to do this yet, thought do know to reference ID
- 
-//   models.Event.update(
-//   {
-    
-//   },
-//   {
-//     where: { id : req.params.id }
-//   })
-//   // connect it to this .then.
-//   .then(function (result) {
-//     res.redirect('/');
-//   }, function(rejectedPromiseError){
-
-//   });
-// });
-
 
 router.post('/delete/:id', function(req,res) {
   console.log(req.params.id);
@@ -213,30 +132,6 @@ router.post('/delete/:id', function(req,res) {
       res.redirect('/events');
     })
   });
-  //Delete event based on the id passed in the url
-  // return models.Event.findOne({
-  //   where:{
-  //     id:req.params.id
-  //   }
-  // }).then (function(deletedEvent){
-  // var deletID=deletedEvent.user_id;
-  // console.log('in the deletion');
-  // console.log(deletID);
-  // return models.Event.destroy({
-  //   where: {
-  //     id: req.params.id
-  //   }
-  // })
-  // .then(function() {
-  //   return models.Gift.destroy({
-  //     where:{
-  //       user_id:deletID
-  //     }
-  //   })
-  //   .then(function(){
-  //     res.redirect('/events');
-  //   })
-  // });
 });
 
 router.post('/deleteaccount/', function(req,res) {
@@ -257,21 +152,18 @@ router.post('/deleteaccount/', function(req,res) {
     });
   }
 });
-// Recursive function to step thru burger array, find associations and return an array
+// Recursive function to step thru passed array, find associations and return an array
 // of customers associated with the id of the burger. This will render the name of the
 // last customer to eat the burger when the burger appears in the 'Burgers eaten' 
 // section of the website.
 function findAssoc(array){
   console.log('got to the top of findAssoc');
-  // if all burgers have been processed, exit recursion
+  // if all members of the array have been processed, exit recursion
   if (counter<array.length){
     // find burger with the id of 'counter' in the table
     return models.Event.findOne({where: {id:array[counter].id}})
       .then (function(search){
-        console.log('returned from the search');
-        console.log(search.user_id);
         // get associated customers (sequelize created command)
-        // return search.getGifts()
         return models.Gift.findAll({
           where:{user_id:search.user_id}
         })
@@ -283,7 +175,6 @@ function findAssoc(array){
               // var someArray=returned[0]['gift_name'];
               console.log(returned[0].gift_name);
             }
-            // console.log(gifts.dataValues.gift_name, gifts.dataValues.max_price, gifts.dataValues.purchased);
             // increment counter, push customer's name to associativity array
             // if the customer name string is empty (user has hit the 'Devour It!'
             // button without entering a name), add "No One" as the last eater
@@ -307,12 +198,9 @@ function findAssoc(array){
                   max_price:returned[i].dataValues.max_price,
                   purchased:returned[i].dataValues.purchased
                 };
-                // console.log('pushing something');
-                // console.log(objToPush);
                 giftArray.push(objToPush);
               }
             }
-            // recursively call the array with the burgers array passed in on
             // initial call
             return giftArray;
           });
@@ -323,6 +211,7 @@ function findAssoc(array){
     
   }
 }
+// var exports = module.exports = {};
 
 function sendEmails() {
   console.log('in the sendEmails function');
@@ -344,14 +233,17 @@ function sendEmails() {
         }
         if (currentDate >= dateThen && !events[i].email_sent){
           console.log('The current date is after or on the notify date, email should be sent for:');
-          console.log(events[i].recipient_name,events[i].event_type);
+          console.log(events[i].id,events[i].event_type);
           console.log('');
-          // Need to update the email_sent boolean here.
+          daily.dailyEmail();
+          events[i].updateAttributes({
+            email_sent:true
+          });
         }
     }
   });
   console.log('leaving the sendEmails function');
-   return true;
+  return true;
 }
 
 
