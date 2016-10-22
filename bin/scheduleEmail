@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-var emailer = require('server.js')
-var bob = require('../controllers/email_controller.js')
-function email_function_will_go_here() {
-	emailer();
-dailyEmail();
-console.log('* * * * * * * * * ');
+// var emailer = require('server.js')
+// var bob = require('../controllers/email_controller.js')
+// function email_function_will_go_here() {
+// 	emailer();
+// dailyEmail();
+// console.log('* * * * * * * * * ');
 
-}
-email_function_will_go_here();
-process.exit();
+// }
+// email_function_will_go_here();
+// process.exit();
 
