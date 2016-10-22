@@ -19,7 +19,9 @@ var options = {//the plugin options
 		       extname: '.hbs',
 		       layoutsDir: 'views/email/',
 		       defaultLayout : 'template',
-		       partialsDir : 'views/email/partialsDaily/'
+		       partialsDir : 'views/email/partialsDaily/',
+		       helpers: {
+		       dateFormat: require('handlebars-dateformat')}
 		   },
 		   viewPath: 'views/email/',
 		   extName: '.hbs'
@@ -52,9 +54,9 @@ exports.dailyEmail = function (req, res) {
 	   		var user = forgetful[i];
 	   		
 	    	var mailOptions = {
-		        from: '"E-minder" <uclaProject2@gmail.com>',
+		        from: '"eMinder" <uclaProject2@gmail.com>',
 		        to: user.email,
-		        subject: "Your daily E-minder!",
+		        subject: "Your daily eMinder!",
 		        template: 'email_body_Daily',
 		        context: {
 		        	user: user
@@ -80,4 +82,3 @@ exports.dailyEmail = function (req, res) {
     })
 };
 
-// module.exports = dailyEmail;
