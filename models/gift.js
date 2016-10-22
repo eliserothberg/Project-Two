@@ -17,36 +17,9 @@ module.exports = function(sequelize, DataTypes) {
     event_id:DataTypes.INTEGER
    }, {
    
-    // don't delete database entries but set the newly added attribute deletedAt
-    // to the current date (when deletion was done). paranoid will only work if
-    // timestamps are enabled
-      // paranoid: true,
-
-    // don't use camelcase for automatically added attributes but underscore style
-    // so updatedAt will be updated_at
-    // underscored: true,
-
-    // disable the modification of tablenames
-    // freezeTableName: true,
-
-    // define the table's name
-    // tableName: 'gifts',
-
     classMethods: {
       associate: function(models) {
-        Gift.belongsToMany(models.Event, {
-          onDelete:"CASCADE",
-          through: models.Eventgifts,
-          unique:false
-        });
-
-            // Gift.hasOne(models.Events);
-        // Gift.belongsTo(models.User, {
-        //   onDelete: "CASCADE",
-        //   foreignKey: {
-        //     allowNull: false
-        //   }
-        // })
+        Gift.belongsToMany(models.Event, {through: models.Eventgifts, unique:false});
       }
     }
   });

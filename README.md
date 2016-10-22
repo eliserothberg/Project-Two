@@ -12,9 +12,9 @@ With a little input from you, we’ll make sure you remember to get that special
 
   If a category is entered, you will be presented with a choice of popular gifts generated using a custom API.
  
-  Once a selection has been made, our custom API also searches ```XXXXXX``` sites for the best price of the item you’ve chosen.
+  Once a selection has been made, our custom API also searches sites for the best price of the item you’ve chosen.
 
-  An email, generated with ```XXXXX```, will be sent to you once a day with the event being tracked, the best web price for that option, a picture, and a link to the retailer. 
+  An email will be sent to you on your requested date to remind you of your upcoming event(s). Additionally, if requested, another email will be sent once a day with the gift being tracked, the best web price for that option, a picture, and a link to the retailer.
 
   Your credit card information is secure because you never need to enter it to use the app.
 
@@ -32,6 +32,7 @@ We utilize the following dependencies:
 - ````express````
 - ````express-handlebars````
 - ````express-session````
+- ````handlebars-dateformat````
 - ````method-override````
 - ````mocha````
 - ````morgan````
@@ -41,7 +42,3 @@ We utilize the following dependencies:
 - ````nodemailer-express-handlebars````
 - ````sequelize````
 - ````sequelize-cli````
-
-
-
-

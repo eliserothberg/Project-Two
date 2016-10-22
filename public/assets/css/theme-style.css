@@ -46,10 +46,10 @@ h3 {
   margin-top: 0px;
 }
 h5 {
-  margin-left: 4px;
-  margin-right: 4px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 hr {
   margin-top: 4px;
@@ -63,8 +63,8 @@ label {
   margin-bottom: 0;
 }
 li {
-  max-width: 220px;
-  margin: 4px;
+  /*max-width: 250px;*/
+  margin: 6px;
   box-shadow: 2px 2px black;
   text-align: left;
   border: 1px solid black;
@@ -150,7 +150,7 @@ video {
 
 #heads {
   font-family: caviar;
-  font-size: 3.0em;
+  font-size: 6vw;
   color: #00701e;
   margin: 0;
 }
@@ -556,15 +556,27 @@ form > div > label > input:focus, form > div > label > select:focus
   opacity: 1;
   box-shadow: 0 3px 4px rgba(0, 0, 0, .15);
 }
-
+@media screen and (max-width: 1321px) {
+  li {
+    width: 353px;
+  }
+}
 @media screen and (max-width: 1260px) {
   .back {
     width: 50%;
   }
 }
+@media screen and (max-width: 1199px) {
+  li {
+    width: 286px;
+  }
+}
 @media screen and (max-width: 991px) {
   #eventAdd {
-    max-width: 162px;
+    max-width: 24%;
+  }
+  li {
+    width: 325px;
   }
 }
 @media (min-width:840px) {
@@ -613,6 +625,43 @@ form > div > label > input:focus, form > div > label > select:focus
     padding-left: 20px;
   }
 }
+@media screen and (max-width:765px) {
+  li {
+    width: 320px;
+  }
+  /*h5 {
+    margin-left: 2px;
+    margin-right: 2px;
+  }*/
+}
+@media screen and (max-width:760px) {
+  #eventAdd {
+    width: 30%;
+  }
+  /*h5 {
+    margin-left: 2px;
+    margin-right: 2px;
+  }*/
+}
+@media screen and (max-width:755px) {
+  li {
+    max-width: 47%;
+  }
+  /*h5 {
+    margin-left: 2px;
+    margin-right: 2px;
+  }*/
+}
+@media screen and (max-width:683px) {
+  li {
+    height: 150px;
+    overflow: scroll;
+  }
+  /*h5 {
+    margin-left: 2px;
+    margin-right: 2px;
+  }*/
+}
 
 @media screen and (max-width:640px) {
   .container {
@@ -642,6 +691,19 @@ form > div > label > input:focus, form > div > label > select:focus
   }
   ul {
     margin-left: -40px !important;
+  }
+  #welBann {
+    font-size: 2.5vw;
+  }
+  #eventAdd {
+    font-size: 2.6vw;
+  }
+}
+@media screen and (max-width:614px) {
+  li {
+    width: 46%;
+    height: 150px;
+    overflow: scroll;
   }
 }
 @media (max-width:480px) {
