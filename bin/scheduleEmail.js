@@ -30,12 +30,10 @@ var options = {//the plugin options
 var exports = module.exports = {};
 
 exports.dailyEmail = function (req, res) {
-    console.log('**** * * I am the dailyEmail function');
     return models.User.findAll({
     	include:[ models.Event]
     })  
 	.then(function(forgetful){
-		// console.log('THIS IS FORGETFUL ' + JSON.stringify(forgetful[0]), null, 2);
 
 		var transporter = nodemailer.createTransport({
 	        service: 'Gmail',
@@ -60,19 +58,18 @@ exports.dailyEmail = function (req, res) {
 		        	user: user
 	      		}
 	    	};
-
-	    	// console.log(mailOptions);
-	    	console.log(mailOptions.context.user.dataValues);
-
-	    	transporter.sendMail(mailOptions, function(error, info){
-		        if(error){
-		            console.log(error);
-		            // res.redirect('/');
-		        }else {
-		            console.log('Message sent: ' + info.response);
-		            // res.redirect('/');
-		        }
-		    });
+	    	if (forgetful[i].dataValues.Events!=''){
+	    		console.log('i would have sent the e-mail');
+		    	// transporter.sendMail(mailOptions, function(error, info){
+			    //     if(error){
+			    //         console.log(error);
+			    //         // res.redirect('/');
+			    //     }else {
+			    //         console.log('Message sent: ' + info.response);
+			    //         // res.redirect('/');
+			    //     }
+			    // });
+	    	}
 
 
 		} 

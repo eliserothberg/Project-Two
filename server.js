@@ -16,6 +16,8 @@ var events_controller = require('./controllers/events_controller');
 var users_controller = require('./controllers/users_controller');
 var gifts_controller = require('./controllers/gifts_controller');
 var email_controller = require('./controllers/email_controller');
+// console.log('trying to call for e-mails');
+// events_controller.sendEmails();
 
 //JAWSDB connection
 // var models  = require('./models');
@@ -35,8 +37,7 @@ var email_controller = require('./controllers/email_controller');
 
 var daily = require('./bin/scheduleEmail.js');
 console.log('about to call the e-mail');
-daily.dailyEmail();
-console.log('Sent the e-mail');
+// daily.dailyEmail();
 // //allows foreign keys
 // sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 var app = express();
