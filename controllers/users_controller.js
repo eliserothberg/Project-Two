@@ -117,8 +117,8 @@ router.post('/create', function(req,res) {
 	        subject: "Welcome to eMinder!",
 	        template: 'email_body',
 	        context: {
-	            username: req.body.username,
-	            event: 'sign-up'
+	            username: req.body.email,
+	            event: 'Birthday'
 	        }
 	    };
 
