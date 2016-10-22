@@ -141,6 +141,8 @@ router.post('/create', function (req, res) {
   // })
   .then(function(event){
     console.log('the gift creation');
+    var eventId=event.id;
+    console.log(eventId);
     // console.log(req.body.gift);
     // if (req.body.gift==''){
     //   console.log('no gift');
@@ -153,7 +155,8 @@ router.post('/create', function (req, res) {
       gift_name:req.body.gift,
       max_price:req.body.maxprice,
       purchased:bought,
-      user_id:userId
+      user_id:userId,
+      event_id:eventId
     });
   })
   .then(function(giftcreated){
@@ -194,17 +197,46 @@ router.get('/signout', function(req,res){
 
 
 router.post('/delete/:id', function(req,res) {
-  // console.log(req);
-  //Delete event based on the id passed in the url
-  models.Event.destroy({
+  console.log(req.params.id);
+  return models.Event.destroy({
     where: {
-      id: req.params.id
+      id:req.params.id
     }
   })
-  .then(function() {
-    res.redirect('/events');
+  .then (function(giftToDel){
+    return models.Gift.destroy({
+      where:{
+        event_id:req.params.id
+      }
+    })
+    .then(function(){
+      res.redirect('/events');
+    })
   });
-
+  //Delete event based on the id passed in the url
+  // return models.Event.findOne({
+  //   where:{
+  //     id:req.params.id
+  //   }
+  // }).then (function(deletedEvent){
+  // var deletID=deletedEvent.user_id;
+  // console.log('in the deletion');
+  // console.log(deletID);
+  // return models.Event.destroy({
+  //   where: {
+  //     id: req.params.id
+  //   }
+  // })
+  // .then(function() {
+  //   return models.Gift.destroy({
+  //     where:{
+  //       user_id:deletID
+  //     }
+  //   })
+  //   .then(function(){
+  //     res.redirect('/events');
+  //   })
+  // });
 });
 
 router.post('/deleteaccount/', function(req,res) {

@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     image_url:DataTypes.TEXT,
     price:DataTypes.DECIMAL,
     deletedAt:DataTypes.DATE,
-    user_id:DataTypes.INTEGER
+    user_id:DataTypes.INTEGER,
+    event_id:DataTypes.INTEGER
    }, {
    
     // don't delete database entries but set the newly added attribute deletedAt
@@ -33,7 +34,11 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        Gift.belongsToMany(models.Event, {through: models.Eventgifts, unique:false});
+        Gift.belongsToMany(models.Event, {
+          onDelete:"CASCADE",
+          through: models.Eventgifts,
+          unique:false
+        });
 
             // Gift.hasOne(models.Events);
         // Gift.belongsTo(models.User, {
