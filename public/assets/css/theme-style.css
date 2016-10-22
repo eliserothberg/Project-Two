@@ -206,6 +206,8 @@ video {
 }
 #optionBut {
   margin-right: 1%;
+  background-color: transparent;
+  border: none;
 }
 #option {
   background-color: transparent;
