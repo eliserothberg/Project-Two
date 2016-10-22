@@ -1,10 +1,10 @@
 
 
-<h4 style="font-family: oksana; color:#4e4d4d;">Hi there! Because you can't remember shit, here is your daily reminder.</h4><br/>
+<h4 style="font-family: oksana; color:#4e4d4d;">Hi there! Because you can't remember shit, here is your daily reminder.</h4>
 
 {{#each user.Events}}
 	
-	<p style="font-family: oksana; color:#4e4d4d;">Remember {{this.event_type}} on {{dateFormat event_date "ddd, MMM D YYYY"}} for {{this.recipient_name}}.</p><br/>
+	<p style="font-family: oksana; color:#4e4d4d;">Remember {{this.event_type}} on {{dateFormat event_date "ddd, MMM D YYYY"}} for {{this.recipient_name}}.</p>
 	
 {{/each}}
 

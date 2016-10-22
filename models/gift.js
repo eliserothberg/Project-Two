@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     image_url:DataTypes.TEXT,
     price:DataTypes.DECIMAL,
     deletedAt:DataTypes.DATE,
-    user_id:DataTypes.INTEGER
+    user_id:DataTypes.INTEGER,
+    event_id:DataTypes.INTEGER
    }, {
    
     classMethods: {
