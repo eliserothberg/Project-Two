@@ -58,6 +58,8 @@ exports.dailyEmail = function (req, res) {
 		        	user: user
 	      		}
 	    	};
+	    	console.log('Just before the mailer');
+	    	console.log(mailOptions);
 	    	if (forgetful[i].dataValues.Events!=''){
 	    		console.log('i would have sent the e-mail');
 		    	// transporter.sendMail(mailOptions, function(error, info){
