@@ -11,7 +11,7 @@ it('should allow user to sign out', function(done) {
       show: true
     });
     nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com/events')
+      .goto('http://localhost:3000/events')
       .wait('a[href*="/users/sign-out"]')
       .click('a[href*="/users/sign-out"]') 
       .wait('.shadow')

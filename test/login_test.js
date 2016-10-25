@@ -9,7 +9,7 @@ describe('Registered user logs in, gets taken to events page', function() {
       show: true
     });
     nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com')
+      .goto('http://localhost:3000')
       .wait()
       .click('#myBtn2')
       // .wait('a[href*="/users/sign-in"]')
@@ -32,20 +32,20 @@ describe('Registered user logs in, gets taken to events page', function() {
       show: true
     });
     nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com/users/sign-in')
+      .goto('http://localhost:3000/users/sign-in')
       .wait('a[href*="/users/sign-in"]')
       .click('a[href*="/users/sign-in"]')
       .wait('#em')
       .type('#em', 'bob@gmail.com')
       .type('#pass', 'bob')
       .click('.button_base.b05_3d_roll')
-      .wait("#mainpage")
+      .wait("#welBann")
       .evaluate(function() {
-        return document.querySelectorAll('div#mainpage')[0].innerText;
+        return document.querySelectorAll('#welBann')[0].innerText;
       })
       .end()
       .then(function(result) {
-        result.should.contain('Occasion');
+        result.should.contain('Welcome');
         done();
       })
       .catch(function(err) {

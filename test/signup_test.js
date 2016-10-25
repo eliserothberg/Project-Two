@@ -11,7 +11,7 @@ describe('Try to sign up but told you are a registered user', function() {
       show: true
     });
     nightmare
-      .goto('https://pure-scrubland-84099.herokuapp.com/users/new')
+      .goto('http://localhost:3000/users/new')
       .wait('a[href*="/users/new"]')
       .click('a[href*="/users/new"]')
       .wait('#un')
